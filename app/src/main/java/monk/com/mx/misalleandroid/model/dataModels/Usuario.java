@@ -5,9 +5,12 @@ package monk.com.mx.misalleandroid.model.dataModels;
  */
 public class Usuario {
 
+    //region Fields
     private String matricula;
     private String password;
+    //endregion
 
+    //region Encapsulation
     public String getMatricula() {
         return matricula;
     }
@@ -23,4 +26,14 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+    //endregion
+
+    //region Constructors
+    public Usuario(){}
+
+    public Usuario(String _matricula, String _password){
+        this.matricula = _matricula;
+        this.password = _password;
+    }
+    //endregion
 }

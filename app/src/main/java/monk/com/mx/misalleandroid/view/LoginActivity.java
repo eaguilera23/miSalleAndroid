@@ -1,5 +1,6 @@
 package monk.com.mx.misalleandroid.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,6 +28,15 @@ public class LoginActivity extends AppCompatActivity {
 
         txt_matricula = (EditText)findViewById(R.id.txt_matricula_login);
         txt_password = (EditText)findViewById(R.id.txt_password_login);
+
+        String error = getIntent().getStringExtra("error");
+        if (!error.isEmpty())
+            onFailedLogin(error);
+    }
+
+    private void onFailedLogin(String error) {
+        Toast toast = Toast.makeText(this, error, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     public void onLoginClick(View v){
@@ -39,4 +49,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public void navigateToLoadingActivity() {
+        Intent intent = new Intent(LoginActivity.this, LoadingActivity.class);
+        intent.putExtra("matricula", txt_matricula.getText().toString());
+        intent.putExtra("password", txt_password.getText().toString());
+        startActivity(intent);
+    }
 }

@@ -12,6 +12,7 @@
             android:name=".view.MainActivity"
             android:label="@string/app_name">
         </activity>
+        <activity android:name=".view.LoadingActivity"></activity>
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

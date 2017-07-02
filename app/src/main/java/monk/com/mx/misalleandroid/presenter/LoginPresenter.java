@@ -1,7 +1,6 @@
 package monk.com.mx.misalleandroid.presenter;
 
-import android.support.v7.app.AppCompatActivity;
-
+import monk.com.mx.misalleandroid.model.InformationManager;
 import monk.com.mx.misalleandroid.view.LoginActivity;
 
 /**
@@ -22,5 +21,6 @@ public class LoginPresenter {
             return;
         }
 
+        activity.navigateToLoadingActivity();
     }
 }
