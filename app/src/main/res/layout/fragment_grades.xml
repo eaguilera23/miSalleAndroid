@@ -1,0 +1,18 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- falta context -->
+
+    <ExpandableListView
+        android:background="@color/colorWhite"
+        android:divider="@color/colorPrimary"
+        android:dividerHeight="1dp"
+        android:id="@+id/lst_grades"
+        android:groupIndicator="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="13dp">
+    </ExpandableListView>
+</FrameLayout>

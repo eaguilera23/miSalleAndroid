@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <TextView
+        android:id="@+id/txv_class_list_grades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la materia"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/ic_apple_black" />
+        <TextView
+            android:id="@+id/txv_teacher_list_grades"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:text="Nombre profesor"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="15dp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/final_grade"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/txv_final_grade_list_grades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="10"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="@string/absences"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/txv_absences_list_grades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="10"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_arrow_list_grades"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@mipmap/ic_arrow_down"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

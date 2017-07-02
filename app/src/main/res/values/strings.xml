@@ -5,4 +5,42 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <!-- login -->
+    <string name="enrollment">Matrícula</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Ingresar</string>
+
+    <!-- menu -->
+    <string name="title_home">Inicio</string>
+    <string name="title_schedule">Horario</string>
+    <string name="title_grades">Calificaciones</string>
+    <string name="title_sign_out">Salir</string>
+    <!-- home -->
+    <string name="next_class">Próxima clase </string>
+    <string name="next_pay_due_date">Próximo pago</string>
+    <string name="remaining_days">Días \nrestantes</string>
+    <string name="tus_creditos">Tus créditos</string>
+    <string name="cultural">cultural</string>
+    <string name="deportivo">deportivo</string>
+    <string name="social">social</string>
+    <!-- list grades, schedule -->
+    <string name="final_grade">Calificación final</string>
+    <string name="absences">Faltas</string>
+    <string name="partial1">Parcial 1</string>
+    <string name="partial2">Parcial 2</string>
+    <string name="partial3">Parcial 3</string>
+    <string name="total_absences">Total de faltas:</string>
+    <!-- pager -->
+    <string name="monday">L</string>
+    <string name="tuesday">M</string>
+    <string name="wednesday">M</string>
+    <string name="thursday">J</string>
+    <string name="friday">V</string>
+    <array name="letters_days_of_week">
+        <item>@string/monday</item>
+        <item>@string/tuesday</item>
+        <item>@string/wednesday</item>
+        <item>@string/thursday</item>
+        <item>@string/friday</item>
+    </array>
 </resources>

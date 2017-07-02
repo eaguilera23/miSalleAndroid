@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_patterns_school"
+            android:scaleType="centerCrop"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="30dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:maxLength="8"
+                android:hint="@string/enrollment"
+                android:id="@+id/txt_matricula_login"
+                android:inputType="numberSigned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:paddingBottom="14dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkGray"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:src="@mipmap/ic_profile_black"
+                android:scaleType="centerInside"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:hint="@string/password"
+                android:id="@+id/txt_password_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkGray"
+                android:inputType="textPassword"
+                android:paddingBottom="14dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:src="@mipmap/ic_key_black"
+                android:scaleType="centerInside"/>
+        </RelativeLayout>
+
+        <Button
+            android:background="@drawable/rounded_rec_orange"
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorWhite"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:onClick="Click" />
+
+    </LinearLayout>
+
+</LinearLayout>

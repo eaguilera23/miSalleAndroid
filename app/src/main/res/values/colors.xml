@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorDarkGray">#3B3D40</color>
+    <color name="colorPrimaryDark">#494B4F</color>
+    <color name="colorPrimary">#999999</color>
+    <color name="gray">#999999</color>
+    <color name="colorLightGray">#EDEDED</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="colorAccent">#FF8008</color>
+    <color name="colorOrange">#FF9400</color>
+    <color name="colorOrangeAccent">#F4932A</color>
+    <color name="colorBlueDark">#3B5998</color>
+    <color name="colorBlue">#548BA0</color>
+    <color name="colorBlueAccent">#007ECC</color>
+    <color name="colorGreen">#97BF5A</color>
+    <color name="colorGreenAccent">#9BB269</color>
+    <color name="colorGreen2">#AFD243</color>
+
+
+    <array name="colors_class">
+        <item>@color/colorOrangeAccent</item>
+        <item>@color/colorBlue</item>
+        <item>@color/colorGreen</item>
+        <item>@color/colorOrangeAccent</item>
+        <item>@color/colorBlueDark</item>
+        <item>@color/colorGreenAccent</item>
+        <item>@color/colorAccent</item>
+        <item>@color/colorBlueAccent</item>
+        <item>@color/colorGreen2</item>
+    </array>
 </resources>
