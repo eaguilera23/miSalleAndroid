@@ -43,4 +43,8 @@
         <item>@string/thursday</item>
         <item>@string/friday</item>
     </array>
+    <!-- Error Messages -->
+    <string name="internet_error">No se ha detectado una conexión a internet activa, intenta más tarde</string>
+    <string name="wrong_credentials_error">Matrícula o contraseña incorrecta, verifica tus credenciales y vuelve a intentarlo</string>
+    <string name="empty_credentials_error">Ingresa tus credenciales por favor</string>
 </resources>
