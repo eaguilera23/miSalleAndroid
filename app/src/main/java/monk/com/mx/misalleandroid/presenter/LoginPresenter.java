@@ -14,7 +14,7 @@ public class LoginPresenter {
         this.activity = pActivity;
     }
 
-    public void Auntenticate(String txt_matricula, String txt_password) {
+    public void CheckFields(String txt_matricula, String txt_password) {
 
         if (txt_matricula.isEmpty() || txt_password.isEmpty()){
             activity.onEmptyFields();

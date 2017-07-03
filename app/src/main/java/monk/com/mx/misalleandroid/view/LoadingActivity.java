@@ -1,6 +1,7 @@
 package monk.com.mx.misalleandroid.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,11 +22,18 @@ public class LoadingActivity extends AppCompatActivity {
         String matricula = getIntent().getStringExtra("matricula");
         String password = getIntent().getStringExtra("password");
         loadingPresenter = new LoadingPresenter(this, matricula, password);
+
         loadingPresenter.LoadInformation();
     }
 
     public void onSuccessfulLoading(){
+        SharedPreferences sharedPreferences = getSharedPreferences("mi_salle", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("session", true);
+        editor.commit();
+
         Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

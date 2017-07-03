@@ -1,6 +1,7 @@
 package monk.com.mx.misalleandroid.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +24,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("mi_salle", 0);
+        boolean session = sharedPreferences.getBoolean("session", false);
+        if (session){
+            navigateToMainActivity();
+            return;
+        }
+
+
         setContentView(R.layout.activity_login);
         loginPresenter = new LoginPresenter(this);
 
@@ -30,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_password = (EditText)findViewById(R.id.txt_password_login);
 
         String error = getIntent().getStringExtra("error");
-        if (!error.isEmpty())
+        if (error != null)
             onFailedLogin(error);
     }
 
@@ -40,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginClick(View v){
-        loginPresenter.Auntenticate(txt_matricula.getText().toString(), txt_password.getText().toString());
+        loginPresenter.CheckFields(txt_matricula.getText().toString(), txt_password.getText().toString());
     }
 
     public void onEmptyFields(){
@@ -53,6 +62,12 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, LoadingActivity.class);
         intent.putExtra("matricula", txt_matricula.getText().toString());
         intent.putExtra("password", txt_password.getText().toString());
+        startActivity(intent);
+    }
+
+    public void navigateToMainActivity(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }

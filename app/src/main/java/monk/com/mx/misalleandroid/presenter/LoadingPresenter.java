@@ -8,7 +8,7 @@ import monk.com.mx.misalleandroid.view.LoadingActivity;
  */
 public class LoadingPresenter {
 
-    private final LoadingActivity loadingActivity;
+    private static LoadingActivity loadingActivity;
     private String _matricula, _password;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
@@ -20,10 +20,14 @@ public class LoadingPresenter {
     public void LoadInformation(){
         InformationManager informationManager = new InformationManager();
 
-        String result = informationManager.GetUserInformation(_matricula, _password);
-        if (result.equals("successful"))
-            loadingActivity.onSuccessfulLoading();
-        else
-            loadingActivity.onErrorLoading(result);
+        informationManager.RequestUserInformation(_matricula, _password);
+    }
+
+    public static void onSuccessfulLoading(){
+        loadingActivity.onSuccessfulLoading();
+    }
+
+    public static void onErrorLoading(String error){
+        loadingActivity.onErrorLoading(error);
     }
 }

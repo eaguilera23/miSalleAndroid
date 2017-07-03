@@ -11,9 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.presenter.MainPresenter;
 import monk.com.mx.misalleandroid.view.helpers.MainNavigationViewListener;
 
 public class MainActivity extends AppCompatActivity {
+
+    MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         MainNavigationViewListener navigationViewListener = new MainNavigationViewListener(this);
 
         navigationView.setNavigationItemSelectedListener(navigationViewListener);
+
+        MenuItem item = navigationView.getMenu().findItem(R.id.nav_home);
+        item.setChecked(true);
+
+        navigationViewListener.onNavigationItemSelected(item);
+
+        mainPresenter = new MainPresenter(this);
     }
 
     @Override

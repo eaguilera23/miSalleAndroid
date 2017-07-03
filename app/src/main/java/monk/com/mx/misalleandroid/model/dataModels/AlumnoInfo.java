@@ -77,5 +77,14 @@ public class AlumnoInfo {
         this.campus = _campus;
         this.programa = _programa;
     }
+
+    public AlumnoInfo(Alumno alumno){
+        this.matricula = alumno.getMatricula();
+        this.nombre = alumno.getNombre();
+        this.apellido_p = alumno.getApellido_p();
+        this.apellido_m = alumno.getApellido_m();
+        this.campus = alumno.getCampus();
+        this.programa = alumno.getPrograma();
+    }
     //endregion
 }
