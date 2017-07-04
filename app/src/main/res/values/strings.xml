@@ -49,4 +49,18 @@
     <string name="empty_credentials_error">Ingresa tus credenciales por favor</string>
     <!-- Loading -->
     <string name="loading">Cargando tu información...</string>
+    <array name="months">
+        <item>ENE</item>
+        <item>FEB</item>
+        <item>MAR</item>
+        <item>ABR</item>
+        <item>MAY</item>
+        <item>JUN</item>
+        <item>JUL</item>
+        <item>AGO</item>
+        <item>SEP</item>
+        <item>OCT</item>
+        <item>NOV</item>
+        <item>DIC</item>
+    </array>
 </resources>

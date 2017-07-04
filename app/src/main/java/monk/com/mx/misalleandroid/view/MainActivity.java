@@ -9,14 +9,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.domain.StringFormater;
+import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
 import monk.com.mx.misalleandroid.presenter.MainPresenter;
 import monk.com.mx.misalleandroid.view.helpers.MainNavigationViewListener;
 
 public class MainActivity extends AppCompatActivity {
 
     MainPresenter mainPresenter;
+    ImageButton _btn_change_img;
+    TextView _txv_enrollment_header, _txv_name_header, _txv_career_header;
+    AlumnoInfo alumnoInfo;
+    public CircleImageView _img_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,20 @@ public class MainActivity extends AppCompatActivity {
         navigationViewListener.onNavigationItemSelected(item);
 
         mainPresenter = new MainPresenter(this);
+
+        //Populate profile
+        View headerView = navigationView.getHeaderView(0);
+        _img_profile = (CircleImageView)headerView.findViewById(R.id.img_profile);
+        _btn_change_img = (ImageButton)headerView.findViewById(R.id.btn_change_img);
+        _txv_enrollment_header = (TextView)headerView.findViewById(R.id.txv_enrollment_header);
+        _txv_name_header = (TextView)headerView.findViewById(R.id.txv_name_header);
+        _txv_career_header = (TextView)headerView.findViewById(R.id.txv_career_header);
+
+        mainPresenter.setAlumnoInfo();
+
+        _txv_enrollment_header.setText(alumnoInfo.getMatricula());
+        _txv_name_header.setText(mainPresenter.getCompleteName(alumnoInfo));
+        _txv_career_header.setText(alumnoInfo.getPrograma().getNombre());
     }
 
     @Override
@@ -74,5 +98,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setAlumnoInfo(AlumnoInfo info) {
+        this.alumnoInfo = info;
     }
 }

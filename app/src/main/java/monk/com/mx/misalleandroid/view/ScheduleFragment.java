@@ -9,7 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.model.dataModels.Clase;
+import monk.com.mx.misalleandroid.presenter.SchedulePresenter;
 import monk.com.mx.misalleandroid.view.helpers.SchedulePageAdapter;
 
 /**
@@ -17,8 +22,11 @@ import monk.com.mx.misalleandroid.view.helpers.SchedulePageAdapter;
  */
 public class ScheduleFragment extends Fragment {
 
-    public ScheduleFragment(){
+    SchedulePresenter schedulePresenter;
 
+    public ScheduleFragment(){
+        schedulePresenter = new SchedulePresenter(this);
+        schedulePresenter.setColors(MyApplication.getContext().getResources().getIntArray(R.array.colors_class));
     }
 
     @Override
@@ -28,7 +36,10 @@ public class ScheduleFragment extends Fragment {
         TabLayout _tab_layout = (TabLayout)v.findViewById(R.id.tab_days_of_week_schedule);
         ViewPager _pgr_week = (ViewPager)v.findViewById(R.id.viewpgr_content_schedule);
 
-        PagerAdapter pagerAdapter = new SchedulePageAdapter(getFragmentManager());
+        // Esto solo sirve para los que NO van el sábado.
+        String[] week = getResources().getStringArray(R.array.letters_days_of_week);
+
+        PagerAdapter pagerAdapter = new SchedulePageAdapter(getFragmentManager(), schedulePresenter, week);
 
         _pgr_week.setAdapter(pagerAdapter);
         _tab_layout.setupWithViewPager(_pgr_week);

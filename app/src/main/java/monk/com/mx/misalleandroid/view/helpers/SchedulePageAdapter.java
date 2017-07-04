@@ -4,6 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
+
+import monk.com.mx.misalleandroid.model.dataModels.Clase;
+import monk.com.mx.misalleandroid.presenter.SchedulePresenter;
 import monk.com.mx.misalleandroid.view.ScheduleListFragment;
 
 /**
@@ -11,19 +15,32 @@ import monk.com.mx.misalleandroid.view.ScheduleListFragment;
  */
 public class SchedulePageAdapter extends FragmentStatePagerAdapter {
 
-    public SchedulePageAdapter(FragmentManager fm) {
+    SchedulePresenter schedulePresenter;
+    String[] week;
+
+    public SchedulePageAdapter(FragmentManager fm, SchedulePresenter presenter, String[] pWeek) {
         super(fm);
+
+        schedulePresenter = presenter;
+        week = pWeek;
     }
 
     @Override
     public Fragment getItem(int position) {
-        ScheduleListFragment _schedule_list = new ScheduleListFragment();
+        ArrayList<Clase> scheduleForDay = schedulePresenter.getScheduleForDay(position + 1);
+        ScheduleListFragment scheduleListFragment = new ScheduleListFragment();
+        scheduleListFragment.setSchedule(scheduleForDay);
 
-        return _schedule_list;
+        return scheduleListFragment;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return week.length;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return week[position];
     }
 }

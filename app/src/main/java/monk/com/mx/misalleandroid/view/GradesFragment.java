@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import java.util.ArrayList;
+
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.model.dataModels.Periodo;
+import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.view.helpers.GradesExListViewAdapter;
 
 /**
@@ -15,8 +19,10 @@ import monk.com.mx.misalleandroid.view.helpers.GradesExListViewAdapter;
  */
 public class GradesFragment extends Fragment {
 
-    public GradesFragment() {
+    GradesPresenter gradesPresenter;
 
+    public GradesFragment() {
+        gradesPresenter = new GradesPresenter(this);
     }
 
     @Override
@@ -24,8 +30,10 @@ public class GradesFragment extends Fragment {
 
         View _v = inflater.inflate(R.layout.fragment_grades, container, false);
 
+        int period = getArguments().getInt("period");
+
         ExpandableListView _lst_grades = (ExpandableListView)_v.findViewById(R.id.lst_grades);
-        _lst_grades.setAdapter(new GradesExListViewAdapter(inflater));
+        _lst_grades.setAdapter(new GradesExListViewAdapter(inflater, gradesPresenter.getGrades(period)));
 
         return _v;
     }

@@ -8,6 +8,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
+import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 
@@ -52,5 +53,15 @@ public class InformationManager {
     public ArrayList<Credito> getCreditos() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializeCreditos(fileHandler.ReadFile("creditos"));
+    }
+
+    public ArrayList<Periodo> getPeriodos() {
+        FileHandler fileHandler = new FileHandler();
+        return JsonHandler.DeserializePeriodos(fileHandler.ReadFile("periodos"));
+    }
+
+    public AlumnoInfo getAlumnoInfo() {
+        FileHandler fileHandler = new FileHandler();
+        return JsonHandler.DeserializeAlumnoInfo(fileHandler.ReadFile("alumnoInfo"));
     }
 }

@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.model.dataModels.Clase;
+import monk.com.mx.misalleandroid.presenter.SchedulePresenter;
 import monk.com.mx.misalleandroid.view.helpers.ScheduleListViewAdapter;
 
 /**
@@ -15,6 +19,7 @@ import monk.com.mx.misalleandroid.view.helpers.ScheduleListViewAdapter;
  */
 public class ScheduleListFragment extends Fragment{
 
+    ArrayList<Clase> scheduleForDay;
     public ScheduleListFragment(){
 
     }
@@ -25,8 +30,12 @@ public class ScheduleListFragment extends Fragment{
 
         ListView _list_schedule = (ListView)_v.findViewById(R.id.lst_schedule);
 
-        _list_schedule.setAdapter(new ScheduleListViewAdapter(inflater));
+        _list_schedule.setAdapter(new ScheduleListViewAdapter(inflater, scheduleForDay));
 
         return _v;
+    }
+
+    public void setSchedule(ArrayList<Clase> schedule) {
+        scheduleForDay = schedule;
     }
 }
