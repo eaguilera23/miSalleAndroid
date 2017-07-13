@@ -84,6 +84,7 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
         _txv_class.setText(boletas.get(i).getMateria().getNombre());
         _txv_teacher.setText(boletas.get(i).getProfesor().getNombre());
         _txv_final_grade.setText(String.valueOf(boletas.get(i).getParciales().get(4).getCalificacion()));
+        _txv_absences.setText(String.valueOf(boletas.get(i).getFaltas()));
 
         return _v;
     }

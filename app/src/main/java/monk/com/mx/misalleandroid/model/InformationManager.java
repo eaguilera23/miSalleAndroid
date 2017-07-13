@@ -1,6 +1,5 @@
 package monk.com.mx.misalleandroid.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import monk.com.mx.misalleandroid.domain.JsonHandler;
@@ -35,7 +34,6 @@ public class InformationManager {
         fileHandler.CreateFile("usuario", JsonHandler.SerializeObject(alumno.getUsuario()));
         fileHandler.CreateFile("alumnoInfo", JsonHandler.SerializeObject(new AlumnoInfo(alumno)));
         fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(alumno.getPeriodos()));
-        fileHandler.CreateFile("faltas", JsonHandler.SerializeObject(alumno.getFaltas()));
         fileHandler.CreateFile("horario", JsonHandler.SerializeObject(alumno.getClases()));
         fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(alumno.getCreditos()));
     }

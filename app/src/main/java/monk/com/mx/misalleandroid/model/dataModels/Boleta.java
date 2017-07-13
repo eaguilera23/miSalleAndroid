@@ -1,5 +1,7 @@
 package monk.com.mx.misalleandroid.model.dataModels;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 
 /**
@@ -11,6 +13,7 @@ public class Boleta {
     private String tipo;
     private Materia materia;
     private Profesor profesor;
+    private Integer faltas;
     private ArrayList<Parcial> parciales;
     //endregion
 
@@ -47,6 +50,10 @@ public class Boleta {
     public void setParciales(ArrayList<Parcial> parciales) {
         this.parciales = parciales;
     }
+
+    public Integer getFaltas() { return faltas; }
+
+    public void setFaltas(Integer faltas) { this.faltas = faltas; }
     //endregion
 
     //region Constructors
