@@ -9,6 +9,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
+import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 
 /**
@@ -61,5 +62,11 @@ public class InformationManager {
     public AlumnoInfo getAlumnoInfo() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializeAlumnoInfo(fileHandler.ReadFile("alumnoInfo"));
+    }
+
+    public void RequestAdvertisingInformation(AdvertisingPresenter presenter) {
+        Usuario dummyData = new Usuario("a", "a");
+        ScrapperRequest scrapperRequest = new ScrapperRequest();
+        scrapperRequest.getAdvertisingRequest(dummyData, presenter);
     }
 }

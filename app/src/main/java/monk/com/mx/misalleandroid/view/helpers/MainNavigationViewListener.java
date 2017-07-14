@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.presenter.GradesPresenter;
+import monk.com.mx.misalleandroid.view.AdvertisingFragment;
 import monk.com.mx.misalleandroid.view.GradesFragment;
 import monk.com.mx.misalleandroid.view.HomeFragment;
 import monk.com.mx.misalleandroid.view.ScheduleFragment;
@@ -38,6 +39,8 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         fragmentTransaction = _activity.getSupportFragmentManager().beginTransaction();
+        AdvertisingFragment _advertising = new AdvertisingFragment();
+        fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
 
         switch (id){
             case R.id.nav_home:

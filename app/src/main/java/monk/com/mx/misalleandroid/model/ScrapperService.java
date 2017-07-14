@@ -1,6 +1,7 @@
 package monk.com.mx.misalleandroid.model;
 
 import monk.com.mx.misalleandroid.model.dataModels.Alumno;
+import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,5 +15,8 @@ public interface ScrapperService {
     //Calling service for Alumno info, returns Alumno class
     @POST("alumno")
     Call<Alumno> getAlumnoInfo(@Body Usuario usuario);
+
+    @POST("anuncio")
+    Call<Anuncio>getAdvertisingInfo(@Body Usuario usuario);
 
 }
