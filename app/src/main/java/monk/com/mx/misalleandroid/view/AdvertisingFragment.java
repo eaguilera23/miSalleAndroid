@@ -1,5 +1,7 @@
 package monk.com.mx.misalleandroid.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -38,8 +40,16 @@ public class AdvertisingFragment extends Fragment {
         return v;
     }
 
-    public void setImgAdvertising(Anuncio ad){
+    public void setImgAdvertising(final Anuncio ad){
         anuncio = ad;
         Picasso.with(MyApplication.getContext()).load(ad.getRuta_imagen()).into(_img_advertising);
+        _img_advertising.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ad.getDestino_click()));
+                startActivity(browserIntent);
+            }
+        });
     }
+
 }
