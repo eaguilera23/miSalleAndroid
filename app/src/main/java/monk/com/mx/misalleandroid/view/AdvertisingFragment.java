@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
@@ -37,6 +40,6 @@ public class AdvertisingFragment extends Fragment {
 
     public void setImgAdvertising(Anuncio ad){
         anuncio = ad;
-
+        Picasso.with(MyApplication.getContext()).load(ad.getRuta_imagen()).into(_img_advertising);
     }
 }

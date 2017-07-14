@@ -44,6 +44,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
 
         switch (id){
             case R.id.nav_home:
+                _activity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 _activity.getSupportActionBar().setDisplayShowTitleEnabled(true);
                 _activity.getSupportActionBar().setTitle(R.string.title_home);
                 HomeFragment _home = new HomeFragment();
@@ -59,6 +60,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                 fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
                 break;
             case R.id.nav_schedule:
+                _activity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
                 _activity.getSupportActionBar().setDisplayShowTitleEnabled(true);
                 _activity.getSupportActionBar().setTitle(R.string.title_schedule);
 
