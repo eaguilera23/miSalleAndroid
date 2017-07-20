@@ -87,6 +87,7 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/txv_payment_header"
             android:background="@color/colorBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,6 +99,7 @@
             android:paddingTop="5dp"
             android:paddingRight="15dp"/>
         <LinearLayout
+            android:id="@+id/txv_payment_line_header"
             android:background="@color/colorBlue"
             android:layout_width="match_parent"
             android:layout_height="5dp"></LinearLayout>

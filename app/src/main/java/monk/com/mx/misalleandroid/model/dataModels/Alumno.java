@@ -18,6 +18,7 @@ public class Alumno {
     private ArrayList<Clase> clases;
     private ArrayList<Periodo> periodos;
     private ArrayList<Falta> faltas;
+    private ArrayList<Pago> pagos;
     //endregion
 
     //region Encapsulation
@@ -108,6 +109,14 @@ public class Alumno {
     public void setFaltas(ArrayList<Falta> faltas) {
         this.faltas = faltas;
     }
+
+    public ArrayList<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(ArrayList<Pago> pagos) {
+        this.pagos = pagos;
+    }
     //endregion
 
     //region Constructors
@@ -128,5 +137,7 @@ public class Alumno {
         this.periodos = _periodos;
         this.faltas = _faltas;
     }
+
+
     //endregion
 }

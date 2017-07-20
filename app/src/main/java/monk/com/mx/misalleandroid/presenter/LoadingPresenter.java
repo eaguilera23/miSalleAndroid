@@ -1,5 +1,9 @@
 package monk.com.mx.misalleandroid.presenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.model.InformationManager;
 import monk.com.mx.misalleandroid.view.LoadingActivity;
 
@@ -9,7 +13,7 @@ import monk.com.mx.misalleandroid.view.LoadingActivity;
 public class LoadingPresenter {
 
     private static LoadingActivity loadingActivity;
-    private String _matricula, _password;
+    private static String _matricula, _password;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
         this.loadingActivity = loadingActivity;
@@ -24,6 +28,13 @@ public class LoadingPresenter {
     }
 
     public static void onSuccessfulLoading(){
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("matricula", _matricula);
+        editor.commit();
+
         loadingActivity.onSuccessfulLoading();
     }
 

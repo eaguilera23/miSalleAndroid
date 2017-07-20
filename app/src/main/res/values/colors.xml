@@ -17,6 +17,8 @@
     <color name="colorGreen">#97BF5A</color>
     <color name="colorGreenAccent">#9BB269</color>
     <color name="colorGreen2">#AFD243</color>
+    <color name="colorRed">#E54108</color>
+
 
 
     <array name="colors_class">

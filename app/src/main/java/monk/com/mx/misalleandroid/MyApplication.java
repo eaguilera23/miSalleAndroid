@@ -17,4 +17,8 @@ public class MyApplication extends Application {
     public static Context getContext() {
         return mContext;
     }
+
+    public static String getPreferencesString() {
+        return "mx.com.monk.misalle.PREFERENCE_FILE_KEY2302";
+    }
 }

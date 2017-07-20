@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
+import monk.com.mx.misalleandroid.model.dataModels.Pago;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 
 /**
@@ -65,5 +66,18 @@ public class JsonHandler {
             alumnoInfo = null;
         }
         return alumnoInfo;
+    }
+
+    public static ArrayList<Pago> DeserializePagos(String json) {
+        ArrayList<Pago> pagos;
+
+        try {
+            Type type = new TypeToken<ArrayList<Pago>>(){}.getType();
+            pagos = gson.fromJson(json, type);
+        }
+        catch (Exception ex){
+            pagos = null;
+        }
+        return pagos;
     }
 }

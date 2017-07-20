@@ -22,7 +22,6 @@ import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
 public class AdvertisingFragment extends Fragment {
 
     AdvertisingPresenter advertisingPresenter;
-    Anuncio anuncio;
 
     public AdvertisingFragment(){
 
@@ -41,11 +40,11 @@ public class AdvertisingFragment extends Fragment {
     }
 
     public void setImgAdvertising(final Anuncio ad){
-        anuncio = ad;
         Picasso.with(MyApplication.getContext()).load(ad.getRuta_imagen()).into(_img_advertising);
         _img_advertising.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                advertisingPresenter.RegisterClick();
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ad.getDestino_click()));
                 startActivity(browserIntent);
             }

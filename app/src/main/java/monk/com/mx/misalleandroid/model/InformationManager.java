@@ -1,12 +1,19 @@
 package monk.com.mx.misalleandroid.model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.domain.JsonHandler;
 import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
+import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
+import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
+import monk.com.mx.misalleandroid.model.dataModels.Pago;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
@@ -37,6 +44,7 @@ public class InformationManager {
         fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(alumno.getPeriodos()));
         fileHandler.CreateFile("horario", JsonHandler.SerializeObject(alumno.getClases()));
         fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(alumno.getCreditos()));
+        fileHandler.CreateFile("pagos", JsonHandler.SerializeObject(alumno.getPagos()));
     }
 
     public void onFinishingRequest() {
@@ -68,5 +76,22 @@ public class InformationManager {
         Usuario dummyData = new Usuario("a", "a");
         ScrapperRequest scrapperRequest = new ScrapperRequest();
         scrapperRequest.getAdvertisingRequest(dummyData, presenter);
+    }
+
+    public void RegisterClick(Click click) {
+        ScrapperRequest scrapperRequest = new ScrapperRequest();
+        scrapperRequest.setClickRequest(click);
+    }
+
+    public String getMatricula() {
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        return sharedPreferences.getString("matricula", "00000");
+    }
+
+    public ArrayList<Pago> getPayments() {
+        FileHandler fileHandler = new FileHandler();
+        return JsonHandler.DeserializePagos(fileHandler.ReadFile("pagos"));
     }
 }

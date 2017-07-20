@@ -1,11 +1,15 @@
 package monk.com.mx.misalleandroid.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
+import monk.com.mx.misalleandroid.model.dataModels.Pago;
 
 /**
  * Created by edago on 7/2/17.
@@ -71,5 +75,54 @@ public class DataHelper {
             }
         });
         return clases_del_dia;
+    }
+
+    public static Pago getNextPayment(ArrayList<Pago> payments, Date today) {
+        Pago nextPayment = new Pago();
+        for (Pago pago: payments){
+            if (!pago.getFecha().before(today)){
+                nextPayment = pago;
+                break;
+            }
+        }
+        return  nextPayment;
+    }
+
+    public static String getMonthFromDate(Pago payment) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(payment.getFecha());
+        int monthNumber = cal.get(Calendar.MONTH);
+        switch (monthNumber){
+            case 0:
+                return "Enero";
+            case 1:
+                return "Febrero";
+            case 2:
+                return "Marzo";
+            case 3:
+                return "Abril";
+            case 4:
+                return "Mayo";
+            case 5:
+                return "Junio";
+            case 6:
+                return "Julio";
+            case 7:
+                return "Agosto";
+            case 8:
+                return "Septiembre";
+            case 9:
+                return "Octubre";
+            case 10:
+                return "Noviembre";
+            case 11:
+                return "Diciembre";
+            default:
+                return "--";
+        }
+    }
+
+    public static int getDaysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
 }

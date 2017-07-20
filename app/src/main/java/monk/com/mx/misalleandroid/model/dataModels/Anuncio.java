@@ -1,6 +1,5 @@
 package monk.com.mx.misalleandroid.model.dataModels;
 
-import android.content.Intent;
 
 /**
  * Created by edago on 7/13/17.

@@ -1,7 +1,11 @@
 package monk.com.mx.misalleandroid.presenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import monk.com.mx.misalleandroid.model.InformationManager;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
+import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.view.AdvertisingFragment;
 
 /**
@@ -11,6 +15,7 @@ public class AdvertisingPresenter {
 
     AdvertisingFragment advertisingFragment;
     InformationManager informationManager;
+    Anuncio anuncio;
 
     public AdvertisingPresenter(AdvertisingFragment fragment){
         advertisingFragment = fragment;
@@ -22,7 +27,18 @@ public class AdvertisingPresenter {
         informationManager.RequestAdvertisingInformation(this);
     }
 
-    public void setAdvertisingImage(Anuncio anuncio){
-        advertisingFragment.setImgAdvertising(anuncio);
+    public void setAdvertisingImage(Anuncio ad){
+        anuncio = ad;
+        advertisingFragment.setImgAdvertising(ad);
+    }
+
+    public void RegisterClick() {
+        String matricula = informationManager.getMatricula();
+
+        Click click = new Click();
+        click.setCampaign_id(anuncio.getCampaign_id());
+        click.setMatricula(matricula);
+
+        informationManager.RegisterClick(click);
     }
 }
