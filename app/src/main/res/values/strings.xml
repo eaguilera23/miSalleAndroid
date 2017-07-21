@@ -43,6 +43,10 @@
         <item>@string/thursday</item>
         <item>@string/friday</item>
     </array>
+    <!-- BottomSheep Profile Image -->
+    <string name="from_camera">Tomar foto</string>
+    <string name="from_gallery">Elegir foto</string>
+    <string name="change_profile_image">Cambiar imagen de perfil</string>
     <!-- Error Messages -->
     <string name="internet_error">No se ha detectado una conexión a internet activa, intenta más tarde</string>
     <string name="wrong_credentials_error">Matrícula o contraseña incorrecta, verifica tus credenciales y vuelve a intentarlo</string>

@@ -1,8 +1,17 @@
 package monk.com.mx.misalleandroid.model;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import monk.com.mx.misalleandroid.MyApplication;
@@ -23,8 +32,6 @@ import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
  * Created by edago on 7/2/17.
  */
 public class InformationManager {
-
-    private ArrayList<Credito> creditos;
 
     public InformationManager(){
 
@@ -93,5 +100,48 @@ public class InformationManager {
     public ArrayList<Pago> getPayments() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializePagos(fileHandler.ReadFile("pagos"));
+    }
+
+    public void SaveProfilePicture(Bitmap picture) {
+        ContextWrapper contextWrapper = new ContextWrapper(MyApplication.getContext());
+        File directory = contextWrapper.getDir("img", Context.MODE_PRIVATE);
+        File mypath = new File(directory, "profile.jpg");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            picture.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("img_perfil", directory.getAbsolutePath());
+        editor.commit();
+    }
+
+    public Bitmap getProfilePicture() {
+        Bitmap bitmap = null;
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        String path = sharedPreferences.getString("img_perfil", null);
+        if (path != null){
+            File file = new File(path, "profile.jpg");
+            try {
+                bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return bitmap;
     }
 }
