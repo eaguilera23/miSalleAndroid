@@ -38,7 +38,7 @@ public class PictureMenuFragment extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(mainActivity.getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, PICTURE_TAKEN_FROM_CAMERA);
+                    getActivity().startActivityForResult(takePictureIntent, PICTURE_TAKEN_FROM_CAMERA);
                     // https://developer.android.com/training/camera/photobasics.html
                     dismiss();
                 }

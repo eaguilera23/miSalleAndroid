@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 
 import java.io.IOException;
@@ -47,15 +48,23 @@ public class MainPresenter {
         Uri uri;
         switch (requestCode){
             case PICTURE_TAKEN_FROM_CAMERA:
+                if (resultCode == mainActivity.RESULT_OK) {
+                    Bundle extras = data.getExtras();
+                    picture = (Bitmap) extras.get("data");
+                }else{
+                    return;
+                }
                 break;
             case PICTURE_TAKEN_FROM_GALLERY:
                 if (resultCode == mainActivity.RESULT_OK){
                     uri = data.getData();
                     picture = MediaStore.Images.Media.getBitmap(mainActivity.getContentResolver(), uri);
+                }else{
+                    return;
                 }
                 break;
             default:
-                break;
+                return;
         }
         informationManager.SaveProfilePicture(picture);
         setProfilePicture(picture);
