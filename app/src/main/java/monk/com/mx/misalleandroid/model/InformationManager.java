@@ -144,4 +144,21 @@ public class InformationManager {
         }
         return bitmap;
     }
+
+    public void setSession(boolean session) {
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("session", session);
+        editor.commit();
+    }
+
+    public boolean getSession() {
+
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("session", false);
+    }
 }

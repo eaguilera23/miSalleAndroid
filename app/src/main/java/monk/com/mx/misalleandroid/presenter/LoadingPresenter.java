@@ -14,6 +14,7 @@ public class LoadingPresenter {
 
     private static LoadingActivity loadingActivity;
     private static String _matricula, _password;
+    private InformationManager informationManager;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
         this.loadingActivity = loadingActivity;
@@ -22,7 +23,7 @@ public class LoadingPresenter {
     }
 
     public void LoadInformation(){
-        InformationManager informationManager = new InformationManager();
+        informationManager = new InformationManager();
 
         informationManager.RequestUserInformation(_matricula, _password);
     }
@@ -40,5 +41,9 @@ public class LoadingPresenter {
 
     public static void onErrorLoading(String error){
         loadingActivity.onErrorLoading(error);
+    }
+
+    public void setSession() {
+        informationManager.setSession(true);
     }
 }

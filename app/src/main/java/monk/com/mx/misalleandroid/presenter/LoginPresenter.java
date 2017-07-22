@@ -23,4 +23,9 @@ public class LoginPresenter {
 
         activity.navigateToLoadingActivity();
     }
+
+    public boolean isSessionActive() {
+        InformationManager informationManager = new InformationManager();
+        return informationManager.getSession();
+    }
 }

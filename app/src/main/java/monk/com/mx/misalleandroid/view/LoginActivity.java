@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("mi_salle", 0);
-        boolean session = sharedPreferences.getBoolean("session", false);
+        loginPresenter = new LoginPresenter(this);
+        boolean session = loginPresenter.isSessionActive();
         if (session){
             navigateToMainActivity();
             return;
