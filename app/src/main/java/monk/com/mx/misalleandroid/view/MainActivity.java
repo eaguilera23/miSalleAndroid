@@ -133,4 +133,10 @@ public class MainActivity extends AppCompatActivity {
     public void setProfilePicture(Bitmap picture) {
         _img_profile.setImageBitmap(picture);
     }
+
+    public void Logout(){
+        mainPresenter.Logout();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
 }

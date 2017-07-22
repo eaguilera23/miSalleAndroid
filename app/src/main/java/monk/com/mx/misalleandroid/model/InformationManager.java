@@ -145,6 +145,15 @@ public class InformationManager {
         return bitmap;
     }
 
+    public void DeleteProfilePicture() {
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("img_perfil", null);
+        editor.commit();
+    }
+
     public void setSession(boolean session) {
         Context context = MyApplication.getContext();
         String preferencesFile = MyApplication.getPreferencesString();

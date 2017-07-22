@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
@@ -19,6 +18,7 @@ import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.view.AdvertisingFragment;
 import monk.com.mx.misalleandroid.view.GradesFragment;
 import monk.com.mx.misalleandroid.view.HomeFragment;
+import monk.com.mx.misalleandroid.view.MainActivity;
 import monk.com.mx.misalleandroid.view.ScheduleFragment;
 
 /**
@@ -26,11 +26,11 @@ import monk.com.mx.misalleandroid.view.ScheduleFragment;
  */
 public class MainNavigationViewListener implements NavigationView.OnNavigationItemSelectedListener, ActionBar.OnNavigationListener {
 
-    private AppCompatActivity _activity;
+    private MainActivity mainActivity;
     FragmentTransaction fragmentTransaction;
 
-    public MainNavigationViewListener(AppCompatActivity activity){
-        _activity = activity;
+    public MainNavigationViewListener(MainActivity activity){
+        mainActivity = activity;
     }
 
 
@@ -38,20 +38,20 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        fragmentTransaction = _activity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
         AdvertisingFragment _advertising = new AdvertisingFragment();
         fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
 
         switch (id){
             case R.id.nav_home:
-                _activity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-                _activity.getSupportActionBar().setDisplayShowTitleEnabled(true);
-                _activity.getSupportActionBar().setTitle(R.string.title_home);
+                mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+                mainActivity.getSupportActionBar().setTitle(R.string.title_home);
                 HomeFragment _home = new HomeFragment();
                 fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
                 break;
             case R.id.nav_grades:
-                _activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
                 createDropDown();
                 Bundle bundle = new Bundle();
                 bundle.putInt("period", 0);
@@ -60,21 +60,22 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                 fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
                 break;
             case R.id.nav_schedule:
-                _activity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-                _activity.getSupportActionBar().setDisplayShowTitleEnabled(true);
-                _activity.getSupportActionBar().setTitle(R.string.title_schedule);
+                mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+                mainActivity.getSupportActionBar().setTitle(R.string.title_schedule);
 
                 ScheduleFragment _horario = new ScheduleFragment();
                 fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
                 break;
             case R.id.nav_sign_out:
+                mainActivity.Logout();
                 break;
             default:
                 break;
         }
 
         fragmentTransaction.commit();
-        DrawerLayout drawer = (DrawerLayout) _activity.findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) mainActivity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -85,9 +86,9 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
         ArrayList<String> items = gradesPresenter.getPeriodosName(months);
 
         //Get the action bar
-        ActionBar actionBar = _activity.getSupportActionBar();
+        ActionBar actionBar = mainActivity.getSupportActionBar();
         //Adapter for spinner
-        ArrayAdapter dataAdapter = new ArrayAdapter<>(_activity, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter dataAdapter = new ArrayAdapter<>(mainActivity, android.R.layout.simple_spinner_item, items);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Create spinner
         actionBar.setListNavigationCallbacks(dataAdapter, this);
@@ -98,7 +99,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
 
-        FragmentManager fragmentManager = _activity.getSupportFragmentManager();
+        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
         GradesFragment grades = new GradesFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("period", itemPosition);

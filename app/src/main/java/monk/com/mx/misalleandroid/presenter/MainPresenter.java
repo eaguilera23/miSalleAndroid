@@ -79,4 +79,9 @@ public class MainPresenter {
         if (picture != null)
             setProfilePicture(picture);
     }
+
+    public void Logout() {
+        informationManager.setSession(false);
+        informationManager.DeleteProfilePicture();
+    }
 }

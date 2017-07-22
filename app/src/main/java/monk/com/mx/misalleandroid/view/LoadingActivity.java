@@ -27,10 +27,6 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     public void onSuccessfulLoading(){
-//        SharedPreferences sharedPreferences = getSharedPreferences("mi_salle", 0);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putBoolean("session", true);
-//        editor.commit();
         loadingPresenter.setSession();
 
         Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
