@@ -5,6 +5,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
+import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +23,7 @@ public class ScrapperRequest {
 
     }
 
-    public void GetAlumnoRequest(Usuario user) {
+    public void GetAlumnoRequest(Usuario user, final LoadingPresenter presenter) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -36,9 +37,10 @@ public class ScrapperRequest {
             public void onResponse(Call<Alumno> call, Response<Alumno> response) {
                 if (response.isSuccessful()){
                     Alumno alumnoResponse = response.body();
-                    InformationManager informationManager = new InformationManager();
-                    informationManager.SaveUserInformation(alumnoResponse);
-                    informationManager.onFinishingRequest();
+//                    InformationManager informationManager = new InformationManager();
+//                    informationManager.SaveUserInformation(alumnoResponse);
+//                    informationManager.onFinishingRequest();
+                    presenter.onRequestResponse(alumnoResponse);
                 }
             }
 

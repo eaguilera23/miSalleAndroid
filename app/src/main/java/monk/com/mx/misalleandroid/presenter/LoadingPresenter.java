@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.model.InformationManager;
+import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.view.LoadingActivity;
 
 /**
@@ -12,8 +13,8 @@ import monk.com.mx.misalleandroid.view.LoadingActivity;
  */
 public class LoadingPresenter {
 
-    private static LoadingActivity loadingActivity;
-    private static String _matricula, _password;
+    private LoadingActivity loadingActivity;
+    private String _matricula, _password;
     private InformationManager informationManager;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
@@ -25,10 +26,12 @@ public class LoadingPresenter {
     public void LoadInformation(){
         informationManager = new InformationManager();
 
-        informationManager.RequestUserInformation(_matricula, _password);
+        informationManager.RequestUserInformation(_matricula, _password, this);
     }
 
-    public static void onSuccessfulLoading(){
+    public void onRequestResponse(Alumno alumno){
+        informationManager.SaveUserInformation(alumno);
+
         Context context = MyApplication.getContext();
         String preferencesFile = MyApplication.getPreferencesString();
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
@@ -39,7 +42,7 @@ public class LoadingPresenter {
         loadingActivity.onSuccessfulLoading();
     }
 
-    public static void onErrorLoading(String error){
+    public void onErrorLoading(String error){
         loadingActivity.onErrorLoading(error);
     }
 

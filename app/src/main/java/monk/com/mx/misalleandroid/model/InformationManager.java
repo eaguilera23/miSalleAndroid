@@ -37,11 +37,11 @@ public class InformationManager {
 
     }
 
-    public void RequestUserInformation(String pMatricula, String pPassword){
+    public void RequestUserInformation(String pMatricula, String pPassword, LoadingPresenter presenter){
 
         Usuario user = new Usuario(pMatricula, pPassword);
         ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.GetAlumnoRequest(user);
+        scrapperRequest.GetAlumnoRequest(user, presenter);
     }
 
     public void SaveUserInformation(Alumno alumno) {
@@ -52,10 +52,6 @@ public class InformationManager {
         fileHandler.CreateFile("horario", JsonHandler.SerializeObject(alumno.getClases()));
         fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(alumno.getCreditos()));
         fileHandler.CreateFile("pagos", JsonHandler.SerializeObject(alumno.getPagos()));
-    }
-
-    public void onFinishingRequest() {
-        LoadingPresenter.onSuccessfulLoading();
     }
 
     public ArrayList<Clase> getSchedule() {
