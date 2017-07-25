@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import monk.com.mx.misalleandroid.model.InformationManager;
+import monk.com.mx.misalleandroid.model.ScrapperRequest;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
+import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.view.AdvertisingFragment;
 
 /**
@@ -15,16 +17,19 @@ public class AdvertisingPresenter {
 
     AdvertisingFragment advertisingFragment;
     InformationManager informationManager;
+    ScrapperRequest scrapperRequest;
     Anuncio anuncio;
 
     public AdvertisingPresenter(AdvertisingFragment fragment){
         advertisingFragment = fragment;
+        scrapperRequest = new ScrapperRequest();
+        informationManager = new InformationManager();
         getAdvertisingImage();
     }
 
     private void getAdvertisingImage(){
-        informationManager = new InformationManager();
-        informationManager.RequestAdvertisingInformation(this);
+        Usuario dummyData = new Usuario("a", "a");
+        scrapperRequest.getAdvertisingRequest(dummyData, this);
     }
 
     public void setAdvertisingImage(Anuncio ad){
@@ -39,6 +44,6 @@ public class AdvertisingPresenter {
         click.setCampaign_id(anuncio.getCampaign_id());
         click.setMatricula(matricula);
 
-        informationManager.RegisterClick(click);
+        scrapperRequest.setClickRequest(click);
     }
 }

@@ -40,34 +40,6 @@ public class InformationManager {
 
     }
 
-    public void RequestUserInformation(String pMatricula, String pPassword, LoadingPresenter presenter){
-
-        Usuario user = new Usuario(pMatricula, pPassword);
-        ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.GetAlumnoRequest(user, presenter);
-    }
-    public void UpdateCreditos(HomePresenter presenter) {
-        Usuario usuario = getUsuario();
-        ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.getCreditosRequest(usuario, presenter);
-    }
-
-    public void UpdatePeriodos(GradesPresenter presenter){
-        Usuario usuario = getUsuario();
-        ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.getPeriodosRequest(usuario, presenter);
-    }
-
-    public void SaveUserInformation(Alumno alumno) {
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.CreateFile("usuario", JsonHandler.SerializeObject(alumno.getUsuario()));
-        fileHandler.CreateFile("alumnoInfo", JsonHandler.SerializeObject(new AlumnoInfo(alumno)));
-        fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(alumno.getPeriodos()));
-        fileHandler.CreateFile("horario", JsonHandler.SerializeObject(alumno.getClases()));
-        fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(alumno.getCreditos()));
-        fileHandler.CreateFile("pagos", JsonHandler.SerializeObject(alumno.getPagos()));
-    }
-
     public ArrayList<Clase> getSchedule() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializeClases(fileHandler.ReadFile("horario"));
@@ -79,9 +51,19 @@ public class InformationManager {
         return JsonHandler.DeserializeCreditos(fileHandler.ReadFile("creditos"));
     }
 
+    public void setCreditos(ArrayList<Credito> creditos) {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(creditos));
+    }
+
     public ArrayList<Periodo> getPeriodos() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializePeriodos(fileHandler.ReadFile("periodos"));
+    }
+
+    public void setPeriodos(ArrayList<Periodo> periodos){
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(periodos));
     }
 
     public Usuario getUsuario(){
@@ -92,17 +74,6 @@ public class InformationManager {
     public AlumnoInfo getAlumnoInfo() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializeAlumnoInfo(fileHandler.ReadFile("alumnoInfo"));
-    }
-
-    public void RequestAdvertisingInformation(AdvertisingPresenter presenter) {
-        Usuario dummyData = new Usuario("a", "a");
-        ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.getAdvertisingRequest(dummyData, presenter);
-    }
-
-    public void RegisterClick(Click click) {
-        ScrapperRequest scrapperRequest = new ScrapperRequest();
-        scrapperRequest.setClickRequest(click);
     }
 
     public String getMatricula() {
@@ -117,7 +88,24 @@ public class InformationManager {
         return JsonHandler.DeserializePagos(fileHandler.ReadFile("pagos"));
     }
 
-    public void SaveProfilePicture(Bitmap picture) {
+    public Bitmap getProfilePicture() {
+        Bitmap bitmap = null;
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        String path = sharedPreferences.getString("img_perfil", null);
+        if (path != null){
+            File file = new File(path, "profile.jpg");
+            try {
+                bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return bitmap;
+    }
+
+    public void setProfilePicture(Bitmap picture) {
         ContextWrapper contextWrapper = new ContextWrapper(MyApplication.getContext());
         File directory = contextWrapper.getDir("img", Context.MODE_PRIVATE);
         File mypath = new File(directory, "profile.jpg");
@@ -143,23 +131,6 @@ public class InformationManager {
         editor.commit();
     }
 
-    public Bitmap getProfilePicture() {
-        Bitmap bitmap = null;
-        Context context = MyApplication.getContext();
-        String preferencesFile = MyApplication.getPreferencesString();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
-        String path = sharedPreferences.getString("img_perfil", null);
-        if (path != null){
-            File file = new File(path, "profile.jpg");
-            try {
-                bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return bitmap;
-    }
-
     public void DeleteProfilePicture() {
         Context context = MyApplication.getContext();
         String preferencesFile = MyApplication.getPreferencesString();
@@ -167,6 +138,13 @@ public class InformationManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("img_perfil", null);
         editor.commit();
+    }
+
+    public boolean getSession() {
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("session", false);
     }
 
     public void setSession(boolean session) {
@@ -178,21 +156,14 @@ public class InformationManager {
         editor.commit();
     }
 
-    public boolean getSession() {
-
-        Context context = MyApplication.getContext();
-        String preferencesFile = MyApplication.getPreferencesString();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("session", false);
-    }
-
-    public void SaveCreditos(ArrayList<Credito> creditos) {
+    public void setUserInformation(Alumno alumno) {
         FileHandler fileHandler = new FileHandler();
-        fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(creditos));
+        fileHandler.CreateFile("usuario", JsonHandler.SerializeObject(alumno.getUsuario()));
+        fileHandler.CreateFile("alumnoInfo", JsonHandler.SerializeObject(new AlumnoInfo(alumno)));
+        fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(alumno.getPeriodos()));
+        fileHandler.CreateFile("horario", JsonHandler.SerializeObject(alumno.getClases()));
+        fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(alumno.getCreditos()));
+        fileHandler.CreateFile("pagos", JsonHandler.SerializeObject(alumno.getPagos()));
     }
 
-    public void SavePeriodos(ArrayList<Periodo> periodos){
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(periodos));
-    }
 }

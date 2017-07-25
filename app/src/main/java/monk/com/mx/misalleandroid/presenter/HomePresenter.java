@@ -8,9 +8,11 @@ import java.util.Date;
 
 import monk.com.mx.misalleandroid.domain.DataHelper;
 import monk.com.mx.misalleandroid.model.InformationManager;
+import monk.com.mx.misalleandroid.model.ScrapperRequest;
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
 import monk.com.mx.misalleandroid.model.dataModels.Pago;
+import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.view.HomeFragment;
 
 /**
@@ -19,6 +21,7 @@ import monk.com.mx.misalleandroid.view.HomeFragment;
 public class HomePresenter {
     private HomeFragment homeFragment;
     private InformationManager informationManager;
+    private ScrapperRequest scrapperRequest;
 
     public HomePresenter(HomeFragment homefrag){
         this.homeFragment = homefrag;
@@ -29,7 +32,9 @@ public class HomePresenter {
     }
 
     private void UpdateCreditos() {
-        informationManager.UpdateCreditos(this);
+        Usuario user = informationManager.getUsuario();
+        scrapperRequest = new ScrapperRequest();
+        scrapperRequest.getCreditosRequest(user, this);
     }
 
     private void setPagos() {

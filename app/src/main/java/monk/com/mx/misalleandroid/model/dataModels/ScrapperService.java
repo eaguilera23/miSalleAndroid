@@ -1,4 +1,4 @@
-package monk.com.mx.misalleandroid.model;
+package monk.com.mx.misalleandroid.model.dataModels;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package monk.com.mx.misalleandroid.presenter;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class MainPresenter {
             default:
                 return;
         }
-        informationManager.SaveProfilePicture(picture);
+        informationManager.setProfilePicture(picture);
         setProfilePicture(picture);
     }
 

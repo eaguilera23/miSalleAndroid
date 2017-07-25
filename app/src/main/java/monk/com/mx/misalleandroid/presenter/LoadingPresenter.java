@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.model.InformationManager;
+import monk.com.mx.misalleandroid.model.ScrapperRequest;
 import monk.com.mx.misalleandroid.model.dataModels.Alumno;
+import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.view.LoadingActivity;
 
 /**
@@ -16,6 +18,7 @@ public class LoadingPresenter {
     private LoadingActivity loadingActivity;
     private String _matricula, _password;
     private InformationManager informationManager;
+    private ScrapperRequest scrapperRequest;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
         this.loadingActivity = loadingActivity;
@@ -24,13 +27,14 @@ public class LoadingPresenter {
     }
 
     public void LoadInformation(){
-        informationManager = new InformationManager();
-
-        informationManager.RequestUserInformation(_matricula, _password, this);
+        Usuario user = new Usuario(_matricula, _password);
+        scrapperRequest = new ScrapperRequest();
+        scrapperRequest.GetAlumnoRequest(user, this);
     }
 
     public void onRequestResponse(Alumno alumno){
-        informationManager.SaveUserInformation(alumno);
+        informationManager = new InformationManager();
+        informationManager.setUserInformation(alumno);
 
         Context context = MyApplication.getContext();
         String preferencesFile = MyApplication.getPreferencesString();

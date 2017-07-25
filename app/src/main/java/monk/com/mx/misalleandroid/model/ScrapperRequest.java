@@ -5,6 +5,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
 import monk.com.mx.misalleandroid.model.dataModels.PeriodosResult;
+import monk.com.mx.misalleandroid.model.dataModels.ScrapperService;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
 import monk.com.mx.misalleandroid.presenter.GradesPresenter;
@@ -41,9 +42,6 @@ public class ScrapperRequest {
             public void onResponse(Call<Alumno> call, Response<Alumno> response) {
                 if (response.isSuccessful()){
                     Alumno alumnoResponse = response.body();
-//                    InformationManager informationManager = new InformationManager();
-//                    informationManager.SaveUserInformation(alumnoResponse);
-//                    informationManager.onFinishingRequest();
                     presenter.onRequestResponse(alumnoResponse);
                 }else {
                     presenter.onErrorLoading("La comunicación con La Salle no pudo ser completada.\nInténtalo más tarde");
@@ -115,7 +113,7 @@ public class ScrapperRequest {
                 if (response.isSuccessful()) {
                     CreditosResult result = response.body();
                     InformationManager informationManager = new InformationManager();
-                    informationManager.SaveCreditos(result.getCreditos());
+                    informationManager.setCreditos(result.getCreditos());
                 }
                 presenter.setCreditos();
             }
@@ -141,7 +139,7 @@ public class ScrapperRequest {
                 if (response.isSuccessful()) {
                     PeriodosResult result = response.body();
                     InformationManager informationManager = new InformationManager();
-                    informationManager.SavePeriodos(result.getPeriodos());
+                    informationManager.setPeriodos(result.getPeriodos());
                     presenter.setPeriodos();
                 }
             }

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import monk.com.mx.misalleandroid.domain.StringFormater;
 import monk.com.mx.misalleandroid.model.InformationManager;
+import monk.com.mx.misalleandroid.model.ScrapperRequest;
 import monk.com.mx.misalleandroid.model.dataModels.Boleta;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
+import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.view.GradesFragment;
 
 /**
@@ -14,7 +16,8 @@ import monk.com.mx.misalleandroid.view.GradesFragment;
 public class GradesPresenter {
 
     private GradesFragment gradesFragment;
-    InformationManager informationManager;
+    private InformationManager informationManager;
+    private ScrapperRequest scrapperRequest;
 
     public GradesPresenter(GradesFragment fragment){
 
@@ -51,6 +54,8 @@ public class GradesPresenter {
     }
 
     public void UpdatePeriodos(){
-        informationManager.UpdatePeriodos(this);
+        Usuario user = informationManager.getUsuario();
+        scrapperRequest = new ScrapperRequest();
+        scrapperRequest.getPeriodosRequest(user, this);
     }
 }
