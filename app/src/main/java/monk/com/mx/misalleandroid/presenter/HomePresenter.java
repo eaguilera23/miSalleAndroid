@@ -24,8 +24,12 @@ public class HomePresenter {
         this.homeFragment = homefrag;
         informationManager = new InformationManager();
         setNextClass();
-        setCreditos();
         setPagos();
+        UpdateCreditos();
+    }
+
+    private void UpdateCreditos() {
+        informationManager.UpdateCreditos(this);
     }
 
     private void setPagos() {
@@ -42,7 +46,7 @@ public class HomePresenter {
         homeFragment.setNextClass(clase);
     }
 
-    private void setCreditos() {
+    public void setCreditos() {
         ArrayList<Credito> creditos = informationManager.getCreditos();
         homeFragment.setCreditos(creditos);
     }

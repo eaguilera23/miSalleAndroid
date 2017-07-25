@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton _btn_change_img;
     TextView _txv_enrollment_header, _txv_name_header, _txv_career_header;
     AlumnoInfo alumnoInfo;
+    MainNavigationViewListener navigationViewListener;
+    NavigationView navigationView;
     public CircleImageView _img_profile;
 
     public void setAlumnoInfo(AlumnoInfo info) {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainPresenter = new MainPresenter(this);
         Toolbar _nav_bar = (Toolbar) findViewById(R.id.nav_bar);
         setSupportActionBar(_nav_bar);
 
@@ -49,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        MainNavigationViewListener navigationViewListener = new MainNavigationViewListener(this);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationViewListener = new MainNavigationViewListener(this);
 
         navigationView.setNavigationItemSelectedListener(navigationViewListener);
 
@@ -58,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
         item.setChecked(true);
 
         navigationViewListener.onNavigationItemSelected(item);
-
-        mainPresenter = new MainPresenter(this);
 
         //Populate profile
         View headerView = navigationView.getHeaderView(0);
@@ -85,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
                 pictureMenuFragment.show(fm, "pictureMenuFragment");
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HomeFragment homeFragment = (HomeFragment)getSupportFragmentManager().findFragmentByTag("home");
+        if (homeFragment != null && homeFragment.isVisible()){
+            MenuItem item = navigationView.getMenu().findItem(R.id.nav_home);
+            item.setChecked(true);
+
+            navigationViewListener.onNavigationItemSelected(item);
+        }
     }
 
     @Override
@@ -138,5 +151,6 @@ public class MainActivity extends AppCompatActivity {
         mainPresenter.Logout();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

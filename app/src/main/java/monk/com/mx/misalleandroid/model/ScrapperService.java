@@ -1,8 +1,11 @@
 package monk.com.mx.misalleandroid.model;
 
+import java.util.List;
+
 import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
+import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,4 +25,7 @@ public interface ScrapperService {
 
     @POST("click")
     Call<Anuncio> setClickOnAdvertising(@Body Click click);
+
+    @POST("creditos")
+    Call<CreditosResult> getCreditos(@Body Usuario usuario);
 }

@@ -168,14 +168,28 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/tus_creditos"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/tus_creditos"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_spinner"
+                android:textColor="@color/gray"
+                android:textSize="15dp"
+                android:id="@+id/_txv_refresh_creditos_home"
+                android:layout_marginLeft="4dp"
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -202,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:text="30"
+                    android:text=""
                     android:textColor="@color/colorWhite"
                     android:textSize="47dp"
                     android:textStyle="bold"/>
@@ -228,7 +242,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:text="30"
+                    android:text=""
                     android:textColor="@color/colorWhite"
                     android:textSize="47dp"
                     android:textStyle="bold"/>
@@ -254,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:text="30"
+                    android:text=""
                     android:textColor="@color/colorWhite"
                     android:textSize="47dp"
                     android:textStyle="bold"/>

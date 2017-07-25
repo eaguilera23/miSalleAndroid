@@ -1,5 +1,6 @@
 package monk.com.mx.misalleandroid.view;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.domain.FontManager;
 import monk.com.mx.misalleandroid.domain.StringFormater;
 import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
@@ -32,7 +34,7 @@ public class HomeFragment extends Fragment {
     TextView _txv_next_class_name, txv_next_class_hour, txv_next_class_teacher,
             _txv_creditos_cultural, txv_creditos_deportivo, txv_creditos_social,
             _txv_pay_due_date_date_home, _txv_pay_due_date_name_home, _txv_remaining_days_home,
-            _txv_payment_header;
+            _txv_payment_header, _txv_refresh_creditos;
     LinearLayout _txv_payment_line_header;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +56,9 @@ public class HomeFragment extends Fragment {
         _txv_payment_header = (TextView)v.findViewById(R.id.txv_payment_header);
         _txv_payment_line_header = (LinearLayout)v.findViewById(R.id.txv_payment_line_header);
 
+        _txv_refresh_creditos = (TextView)v.findViewById(R.id._txv_refresh_creditos_home);
+        _txv_refresh_creditos.setTypeface(FontManager.getTypeface(FontManager.FONTAWESOME));
+
         homePresenter = new HomePresenter(this);
 
         return v;
@@ -66,6 +71,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void setCreditos(ArrayList<Credito> creditos) {
+        _txv_refresh_creditos.setText("");
         txv_creditos_social.setText(String.valueOf(creditos.get(0).getActuales()));
         _txv_creditos_cultural.setText(String.valueOf(creditos.get(1).getActuales()));
         txv_creditos_deportivo.setText(String.valueOf(creditos.get(2).getActuales()));

@@ -3,6 +3,9 @@ package monk.com.mx.misalleandroid;
 import android.app.Application;
 import android.content.Context;
 
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+
 /**
  * Created by edago on 7/2/17.
  */
@@ -13,6 +16,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
+        Iconify.with(new FontAwesomeModule());
     }
     public static Context getContext() {
         return mContext;

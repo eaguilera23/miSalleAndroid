@@ -11,6 +11,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Clase;
 import monk.com.mx.misalleandroid.model.dataModels.Credito;
 import monk.com.mx.misalleandroid.model.dataModels.Pago;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
+import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 
 /**
  * Created by edago on 7/2/17.
@@ -79,5 +80,17 @@ public class JsonHandler {
             pagos = null;
         }
         return pagos;
+    }
+
+    public static Usuario DeserializeUsuario(String json) {
+        Usuario usuario;
+        try {
+            Type type = new TypeToken<Usuario>(){}.getType();
+             usuario = gson.fromJson(json, type);
+        }
+        catch (Exception ex){
+            usuario = null;
+        }
+        return usuario;
     }
 }

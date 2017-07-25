@@ -26,10 +26,10 @@ public class MainPresenter {
 
     public MainPresenter(MainActivity pActivity) {
         mainActivity = pActivity;
+        informationManager = new InformationManager();
     }
 
     public AlumnoInfo getAlumnoInfo() {
-        informationManager = new InformationManager();
         AlumnoInfo alumnoInfo = informationManager.getAlumnoInfo();
         return alumnoInfo;
     }

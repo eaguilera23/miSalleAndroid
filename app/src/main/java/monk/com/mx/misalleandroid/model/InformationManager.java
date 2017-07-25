@@ -26,7 +26,9 @@ import monk.com.mx.misalleandroid.model.dataModels.Pago;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
+import monk.com.mx.misalleandroid.presenter.HomePresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
+import monk.com.mx.misalleandroid.presenter.MainPresenter;
 
 /**
  * Created by edago on 7/2/17.
@@ -42,6 +44,11 @@ public class InformationManager {
         Usuario user = new Usuario(pMatricula, pPassword);
         ScrapperRequest scrapperRequest = new ScrapperRequest();
         scrapperRequest.GetAlumnoRequest(user, presenter);
+    }
+    public void UpdateCreditos(HomePresenter presenter) {
+        Usuario usuario = getUsuario();
+        ScrapperRequest scrapperRequest = new ScrapperRequest();
+        scrapperRequest.getCreditosRequest(usuario, presenter);
     }
 
     public void SaveUserInformation(Alumno alumno) {
@@ -68,6 +75,11 @@ public class InformationManager {
     public ArrayList<Periodo> getPeriodos() {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializePeriodos(fileHandler.ReadFile("periodos"));
+    }
+
+    public Usuario getUsuario(){
+        FileHandler fileHandler = new FileHandler();
+        return JsonHandler.DeserializeUsuario(fileHandler.ReadFile("usuario"));
     }
 
     public AlumnoInfo getAlumnoInfo() {
@@ -165,5 +177,10 @@ public class InformationManager {
         String preferencesFile = MyApplication.getPreferencesString();
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("session", false);
+    }
+
+    public void SaveCreditos(ArrayList<Credito> creditos) {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(creditos));
     }
 }

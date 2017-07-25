@@ -3,8 +3,10 @@ package monk.com.mx.misalleandroid.model;
 import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
+import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
+import monk.com.mx.misalleandroid.presenter.HomePresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,5 +96,29 @@ public class ScrapperRequest {
 
             }
         });
+    }
+
+    public void getCreditosRequest(Usuario user, final HomePresenter presenter) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ScrapperService scrapperService = retrofit.create(ScrapperService.class);
+        final Call<CreditosResult> creditosResultCallCall = scrapperService.getCreditos(user);
+        creditosResultCallCall.enqueue(new Callback<CreditosResult>() {
+            @Override
+            public void onResponse(Call<CreditosResult> call, Response<CreditosResult> response) {
+                CreditosResult result = response.body();
+                InformationManager informationManager = new InformationManager();
+                informationManager.SaveCreditos(result.getCreditos());
+                presenter.setCreditos();
+            }
+
+            @Override
+            public void onFailure(Call<CreditosResult> call, Throwable t) {
+                presenter.setCreditos();
+            }
+        });
+
     }
 }

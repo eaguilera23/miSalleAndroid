@@ -63,11 +63,13 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("matricula", txt_matricula.getText().toString());
         intent.putExtra("password", txt_password.getText().toString());
         startActivity(intent);
+        finish();
     }
 
     public void navigateToMainActivity(){
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 }
