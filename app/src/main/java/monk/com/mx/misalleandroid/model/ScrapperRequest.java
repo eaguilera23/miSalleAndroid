@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ScrapperRequest {
 
-    private String BASE_URL = "http://pruebatarea2302.herokuapp.com/";
+    private String BASE_URL = "http://pruebatarea2302.herokuapp.com/api/v1/";
 
     public ScrapperRequest(){
 
@@ -45,12 +45,14 @@ public class ScrapperRequest {
 //                    informationManager.SaveUserInformation(alumnoResponse);
 //                    informationManager.onFinishingRequest();
                     presenter.onRequestResponse(alumnoResponse);
+                }else {
+                    presenter.onErrorLoading("La comunicación con La Salle no pudo ser completada.\nInténtalo más tarde");
                 }
             }
 
             @Override
             public void onFailure(Call<Alumno> call, Throwable t) {
-
+                presenter.onErrorLoading("La comunicación con La Salle no pudo ser completada.\nInténtalo más tarde");
             }
         });
     }
