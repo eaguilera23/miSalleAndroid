@@ -67,9 +67,6 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                 ScheduleFragment _horario = new ScheduleFragment();
                 fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
                 break;
-            case R.id.nav_sign_out:
-                mainActivity.Logout();
-                break;
             default:
                 break;
         }

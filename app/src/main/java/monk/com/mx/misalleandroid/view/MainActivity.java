@@ -21,6 +21,7 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
+import monk.com.mx.misalleandroid.presenter.LoginPresenter;
 import monk.com.mx.misalleandroid.presenter.MainPresenter;
 import monk.com.mx.misalleandroid.view.helpers.MainNavigationViewListener;
 
@@ -125,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.logout) {
+            Logout();
         }
 
         return super.onOptionsItemSelected(item);
