@@ -14,12 +14,15 @@ import monk.com.mx.misalleandroid.view.GradesFragment;
 public class GradesPresenter {
 
     private GradesFragment gradesFragment;
+    InformationManager informationManager;
 
     public GradesPresenter(GradesFragment fragment){
+
         gradesFragment = fragment;
+        informationManager = new InformationManager();
     }
     public GradesPresenter(){
-
+        informationManager = new InformationManager();
     }
 
     public ArrayList<String> getPeriodosName(String[] months) {
@@ -35,12 +38,19 @@ public class GradesPresenter {
     }
 
     public ArrayList<Periodo> getPeriodos(){
-        InformationManager informationManager = new InformationManager();
         return informationManager.getPeriodos();
     }
 
     public ArrayList<Boleta> getGrades(int period) {
         ArrayList<Periodo> periodos = getPeriodos();
         return periodos.get(period).getBoletas();
+    }
+
+    public void setPeriodos(){
+        gradesFragment.UpdatePeriodsView();
+    }
+
+    public void UpdatePeriodos(){
+        informationManager.UpdatePeriodos(this);
     }
 }

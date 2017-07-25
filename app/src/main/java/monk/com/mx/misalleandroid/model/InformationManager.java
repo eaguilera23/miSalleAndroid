@@ -26,6 +26,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Pago;
 import monk.com.mx.misalleandroid.model.dataModels.Periodo;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
+import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.presenter.HomePresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 import monk.com.mx.misalleandroid.presenter.MainPresenter;
@@ -49,6 +50,12 @@ public class InformationManager {
         Usuario usuario = getUsuario();
         ScrapperRequest scrapperRequest = new ScrapperRequest();
         scrapperRequest.getCreditosRequest(usuario, presenter);
+    }
+
+    public void UpdatePeriodos(GradesPresenter presenter){
+        Usuario usuario = getUsuario();
+        ScrapperRequest scrapperRequest = new ScrapperRequest();
+        scrapperRequest.getPeriodosRequest(usuario, presenter);
     }
 
     public void SaveUserInformation(Alumno alumno) {
@@ -182,5 +189,10 @@ public class InformationManager {
     public void SaveCreditos(ArrayList<Credito> creditos) {
         FileHandler fileHandler = new FileHandler();
         fileHandler.CreateFile("creditos", JsonHandler.SerializeObject(creditos));
+    }
+
+    public void SavePeriodos(ArrayList<Periodo> periodos){
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.CreateFile("periodos", JsonHandler.SerializeObject(periodos));
     }
 }

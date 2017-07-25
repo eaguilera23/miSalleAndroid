@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton _btn_change_img;
     TextView _txv_enrollment_header, _txv_name_header, _txv_career_header;
     AlumnoInfo alumnoInfo;
-    MainNavigationViewListener navigationViewListener;
-    NavigationView navigationView;
+    private MainNavigationViewListener navigationViewListener;
+    private NavigationView navigationView;
     public CircleImageView _img_profile;
 
     public void setAlumnoInfo(AlumnoInfo info) {
@@ -52,18 +52,18 @@ public class MainActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationViewListener = new MainNavigationViewListener(this);
+        setNavigationView((NavigationView) findViewById(R.id.nav_view));
+        setNavigationViewListener(new MainNavigationViewListener(this));
 
-        navigationView.setNavigationItemSelectedListener(navigationViewListener);
+        getNavigationView().setNavigationItemSelectedListener(getNavigationViewListener());
 
-        MenuItem item = navigationView.getMenu().findItem(R.id.nav_home);
+        MenuItem item = getNavigationView().getMenu().findItem(R.id.nav_home);
         item.setChecked(true);
 
-        navigationViewListener.onNavigationItemSelected(item);
+        getNavigationViewListener().onNavigationItemSelected(item);
 
         //Populate profile
-        View headerView = navigationView.getHeaderView(0);
+        View headerView = getNavigationView().getHeaderView(0);
         _img_profile = (CircleImageView)headerView.findViewById(R.id.img_profile);
         _btn_change_img = (ImageButton)headerView.findViewById(R.id.btn_change_img);
         _txv_enrollment_header = (TextView)headerView.findViewById(R.id.txv_enrollment_header);
@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         HomeFragment homeFragment = (HomeFragment)getSupportFragmentManager().findFragmentByTag("home");
         if (homeFragment != null && homeFragment.isVisible()){
-            MenuItem item = navigationView.getMenu().findItem(R.id.nav_home);
+            MenuItem item = getNavigationView().getMenu().findItem(R.id.nav_home);
             item.setChecked(true);
 
-            navigationViewListener.onNavigationItemSelected(item);
+            getNavigationViewListener().onNavigationItemSelected(item);
         }
     }
 
@@ -152,5 +152,21 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public MainNavigationViewListener getNavigationViewListener() {
+        return navigationViewListener;
+    }
+
+    public void setNavigationViewListener(MainNavigationViewListener navigationViewListener) {
+        this.navigationViewListener = navigationViewListener;
+    }
+
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
+
+    public void setNavigationView(NavigationView navigationView) {
+        this.navigationView = navigationView;
     }
 }

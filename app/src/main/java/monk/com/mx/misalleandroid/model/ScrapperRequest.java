@@ -4,8 +4,10 @@ import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
+import monk.com.mx.misalleandroid.model.dataModels.PeriodosResult;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
+import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.presenter.HomePresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 import retrofit2.Call;
@@ -108,9 +110,11 @@ public class ScrapperRequest {
         creditosResultCallCall.enqueue(new Callback<CreditosResult>() {
             @Override
             public void onResponse(Call<CreditosResult> call, Response<CreditosResult> response) {
-                CreditosResult result = response.body();
-                InformationManager informationManager = new InformationManager();
-                informationManager.SaveCreditos(result.getCreditos());
+                if (response.isSuccessful()) {
+                    CreditosResult result = response.body();
+                    InformationManager informationManager = new InformationManager();
+                    informationManager.SaveCreditos(result.getCreditos());
+                }
                 presenter.setCreditos();
             }
 
@@ -120,5 +124,30 @@ public class ScrapperRequest {
             }
         });
 
+    }
+
+    public void getPeriodosRequest(Usuario user, final GradesPresenter presenter){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ScrapperService scrapperService = retrofit.create(ScrapperService.class);
+        final Call<PeriodosResult> periodosResultCall = scrapperService.getPeriodos(user);
+        periodosResultCall.enqueue(new Callback<PeriodosResult>() {
+            @Override
+            public void onResponse(Call<PeriodosResult> call, Response<PeriodosResult> response) {
+                if (response.isSuccessful()) {
+                    PeriodosResult result = response.body();
+                    InformationManager informationManager = new InformationManager();
+                    informationManager.SavePeriodos(result.getPeriodos());
+                    presenter.setPeriodos();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PeriodosResult> call, Throwable t) {
+
+            }
+        });
     }
 }

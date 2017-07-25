@@ -4,15 +4,23 @@
     android:layout_height="match_parent">
     <!-- falta context -->
 
-    <ExpandableListView
-        android:background="@color/colorWhite"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="1dp"
-        android:id="@+id/lst_grades"
-        android:groupIndicator="@null"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="15dp"
-        android:paddingRight="13dp">
-    </ExpandableListView>
+        android:layout_height="wrap_content"
+        android:id="@+id/refresh_grades_container">
+
+        <ExpandableListView
+            android:background="@color/colorWhite"
+            android:divider="@color/colorPrimary"
+            android:dividerHeight="1dp"
+            android:id="@+id/lst_grades"
+            android:groupIndicator="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="13dp">
+        </ExpandableListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </FrameLayout>

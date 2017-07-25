@@ -18,15 +18,15 @@ import monk.com.mx.misalleandroid.model.dataModels.Boleta;
 public class GradesExListViewAdapter extends BaseExpandableListAdapter {
 
     LayoutInflater inflater;
-    ArrayList<Boleta> boletas;
+    private ArrayList<Boleta> boletas;
 
     public GradesExListViewAdapter(LayoutInflater pInflater, ArrayList<Boleta> content){
         inflater = pInflater;
-        boletas = content;
+        setBoletas(content);
     }
     @Override
     public int getGroupCount() {
-        return boletas.size();
+        return getBoletas().size();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int i) {
-        return boletas.get(i);
+        return getBoletas().get(i);
     }
 
     @Override
@@ -81,10 +81,10 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
 
         _txv_class.setTextColor(colors[i]);
 
-        _txv_class.setText(boletas.get(i).getMateria().getNombre());
-        _txv_teacher.setText(boletas.get(i).getProfesor().getNombre());
-        _txv_final_grade.setText(String.valueOf(boletas.get(i).getParciales().get(4).getCalificacion()));
-        _txv_absences.setText(String.valueOf(boletas.get(i).getFaltas()));
+        _txv_class.setText(getBoletas().get(i).getMateria().getNombre());
+        _txv_teacher.setText(getBoletas().get(i).getProfesor().getNombre());
+        _txv_final_grade.setText(String.valueOf(getBoletas().get(i).getParciales().get(4).getCalificacion()));
+        _txv_absences.setText(String.valueOf(getBoletas().get(i).getFaltas()));
 
         return _v;
     }
@@ -98,9 +98,9 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
         TextView _txv_partial2 = (TextView)_v.findViewById(R.id.txv_partial2_list_grades);
         TextView _txv_partial3 = (TextView)_v.findViewById(R.id.txv_partial3_list_grades);
 
-        _txv_partial1.setText(String.valueOf(boletas.get(i).getParciales().get(0).getCalificacion()));
-        _txv_partial2.setText(String.valueOf(boletas.get(i).getParciales().get(1).getCalificacion()));
-        _txv_partial3.setText(String.valueOf(boletas.get(i).getParciales().get(2).getCalificacion()));
+        _txv_partial1.setText(String.valueOf(getBoletas().get(i).getParciales().get(0).getCalificacion()));
+        _txv_partial2.setText(String.valueOf(getBoletas().get(i).getParciales().get(1).getCalificacion()));
+        _txv_partial3.setText(String.valueOf(getBoletas().get(i).getParciales().get(2).getCalificacion()));
 
         return _v;
     }
@@ -108,5 +108,13 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return false;
+    }
+
+    public ArrayList<Boleta> getBoletas() {
+        return boletas;
+    }
+
+    public void setBoletas(ArrayList<Boleta> boletas) {
+        this.boletas = boletas;
     }
 }

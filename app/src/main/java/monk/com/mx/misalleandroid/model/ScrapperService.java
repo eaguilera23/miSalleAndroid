@@ -6,6 +6,7 @@ import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
+import monk.com.mx.misalleandroid.model.dataModels.PeriodosResult;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,4 +29,7 @@ public interface ScrapperService {
 
     @POST("creditos")
     Call<CreditosResult> getCreditos(@Body Usuario usuario);
+
+    @POST("periodos")
+    Call<PeriodosResult> getPeriodos(@Body Usuario usuario);
 }
