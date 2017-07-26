@@ -34,7 +34,7 @@ public class GradesPresenter {
 
         for (int i = 0; i < periods.size(); i++){
             Periodo periodo = periods.get(i);
-            periods_name.add(StringFormater.ToPeriod(periodo.getMes_inicio(), periodo.getMes_final(), months, periodo.getYear()));
+            periods_name.add(periodo.getNombre());
         }
 
         return periods_name;
