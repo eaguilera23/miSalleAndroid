@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.domain.JsonHandler;
@@ -44,6 +46,27 @@ public class InformationManager {
         FileHandler fileHandler = new FileHandler();
         return JsonHandler.DeserializeClases(fileHandler.ReadFile("horario"));
 
+    }
+
+    public ArrayList<Clase> getScheduleForDay(int day, ArrayList<Clase> schedule){
+        //Se
+        ArrayList<Clase> scheduleForDay = new ArrayList<>();
+
+        //Obtain classes of the day
+        for (Clase clase: schedule) {
+            if (clase.getDia() == day)
+                scheduleForDay.add(clase);
+        }
+
+        //Sort by hour
+        Collections.sort(scheduleForDay, new Comparator<Clase>() {
+            @Override
+            public int compare(Clase lhs, Clase rhs) {
+                return lhs.getHora_inicio() - rhs.getHora_inicio();
+            }
+        });
+
+        return scheduleForDay;
     }
 
     public ArrayList<Credito> getCreditos() {

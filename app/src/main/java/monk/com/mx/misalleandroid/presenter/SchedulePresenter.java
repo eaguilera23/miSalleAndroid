@@ -21,33 +21,13 @@ public class SchedulePresenter {
     public SchedulePresenter(ScheduleFragment fragment){
         this.scheduleFragment = fragment;
         informationManager = new InformationManager();
-        setSchedule();
-    }
-
-    private void setSchedule(){
         schedule = informationManager.getSchedule();
     }
 
     public ArrayList<Clase> getScheduleForDay(int day){
-        //Se
-        ArrayList<Clase> scheduleForDay = new ArrayList<>();
+        ArrayList<Clase> scheduleForDay = informationManager.getScheduleForDay(day, schedule);
 
-        //Obtain classes of the day
-        for (Clase clase: schedule) {
-            if (clase.getDia() == day)
-                scheduleForDay.add(clase);
-        }
-
-        //Sort by hour
-        Collections.sort(scheduleForDay, new Comparator<Clase>() {
-            @Override
-            public int compare(Clase lhs, Clase rhs) {
-                return lhs.getHora_inicio() - rhs.getHora_inicio();
-            }
-        });
-
-        scheduleForDay = setScheduleForDayColors(scheduleForDay);
-        return scheduleForDay;
+        return setScheduleForDayColors(scheduleForDay);
     }
 
     public ArrayList<Clase> setScheduleForDayColors(ArrayList<Clase> scheduleForDay) {

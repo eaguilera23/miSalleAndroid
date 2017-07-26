@@ -3,6 +3,7 @@ package monk.com.mx.misalleandroid.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ public class GradesFragment extends Fragment {
     ExpandableListView _lst_grades;
     SwipeRefreshLayout swipeRefreshLayout;
     GradesExListViewAdapter gradesAdapter;
+    int period;
 
     public GradesFragment() {
         gradesPresenter = new GradesPresenter(this);
@@ -37,6 +39,8 @@ public class GradesFragment extends Fragment {
 
         View _v = inflater.inflate(R.layout.fragment_grades, container, false);
 
+        period = getArguments().getInt("period");
+
         swipeRefreshLayout = (SwipeRefreshLayout)_v.findViewById(R.id.refresh_grades_container);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -45,8 +49,6 @@ public class GradesFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
-        int period = getArguments().getInt("period");
 
         _lst_grades = (ExpandableListView)_v.findViewById(R.id.lst_grades);
         ArrayList<Boleta> grades = gradesPresenter.getGrades(period);
@@ -59,9 +61,17 @@ public class GradesFragment extends Fragment {
 
     public void UpdatePeriodsView(){
         MainActivity activity = (MainActivity)getActivity();
-        MenuItem item = activity.getNavigationView().getMenu().findItem(R.id.nav_grades);
-        item.setChecked(true);
+//        MenuItem item = activity.getNavigationView().getMenu().findItem(R.id.nav_grades);
+//        item.setChecked(true);
+//
+//        activity.getNavigationViewListener().onNavigationItemSelected(item);
+//        activity.
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        GradesFragment newFragment = new GradesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("period", period);
+        newFragment.setArguments(bundle);
 
-        activity.getNavigationViewListener().onNavigationItemSelected(item);
+        fragmentManager.beginTransaction().replace(R.id.frag_content_main, newFragment, "grades").commit();
     }
 }

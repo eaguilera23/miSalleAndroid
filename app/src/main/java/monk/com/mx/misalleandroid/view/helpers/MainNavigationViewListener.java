@@ -39,6 +39,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         AdvertisingFragment _advertising = new AdvertisingFragment();
         fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
 

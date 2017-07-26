@@ -50,7 +50,6 @@ public class ScheduleListViewAdapter extends BaseAdapter {
         TextView _txv_hour = (TextView)_v.findViewById(R.id.txv_hour_item_schedule);
         TextView _txv_class = (TextView)_v.findViewById(R.id.txv_class_name_item_schedule);
         TextView _txv_teacher = (TextView)_v.findViewById(R.id.txv_teacher_name_item_schedule);
-        TextView _txv_absences = (TextView)_v.findViewById(R.id.txv_absences_item_schedule);
 
         Clase clase = schedule.get(i);
 
