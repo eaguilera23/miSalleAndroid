@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
         if (daysBetween > 15){
             color = ContextCompat.getColor(MyApplication.getContext(), R.color.colorGreen);
             _txv_remaining_days_home.setBackgroundResource(R.drawable.circle_green);
-        }else if (daysBetween < 15 && daysBetween > 5){
+        }else if (daysBetween <= 15 && daysBetween >= 5){
             color = ContextCompat.getColor(MyApplication.getContext(), R.color.colorBlue);
             _txv_remaining_days_home.setBackgroundResource(R.drawable.circle_blue);
         }else{
