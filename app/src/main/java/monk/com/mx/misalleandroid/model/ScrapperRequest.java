@@ -44,7 +44,10 @@ public class ScrapperRequest {
                     Alumno alumnoResponse = response.body();
                     presenter.onRequestResponse(alumnoResponse);
                 }else {
-                    presenter.onErrorLoading("La comunicación con La Salle no pudo ser completada.\nInténtalo más tarde");
+                    if (response.code() == 420)
+                        presenter.onErrorLoading("Por favor ingresa las mismas credenciales que utilizas en la comunidad de La Salle");
+                    else
+                        presenter.onErrorLoading("La comunicación con La Salle no pudo ser completada.\nInténtalo más tarde");
                 }
             }
 
