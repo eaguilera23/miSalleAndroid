@@ -46,4 +46,10 @@ public class ScheduleFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().invalidateOptionsMenu();
+    }
 }

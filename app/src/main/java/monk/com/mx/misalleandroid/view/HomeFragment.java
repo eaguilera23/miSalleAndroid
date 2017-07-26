@@ -64,6 +64,12 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().invalidateOptionsMenu();
+    }
+
     public void setNextClass(Clase nextClass) {
         _txv_next_class_name.setText(nextClass.getMateria().getNombre());
         txv_next_class_hour.setText(StringFormater.ToHour(nextClass.getHora_inicio(), nextClass.getHora_final()));

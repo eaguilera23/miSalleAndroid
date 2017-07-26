@@ -69,6 +69,12 @@ public class GradesFragment extends Fragment {
         return _v;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().invalidateOptionsMenu();
+    }
+
     public void UpdatePeriodsView(){
         MainActivity activity = (MainActivity)getActivity();
 //        MenuItem item = activity.getNavigationView().getMenu().findItem(R.id.nav_grades);
