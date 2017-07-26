@@ -1,5 +1,6 @@
 package monk.com.mx.misalleandroid.view.helpers;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,8 +79,14 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
         }
 
         int[] colors = _v.getResources().getIntArray(R.array.colors_class);
+        int color;
+        int j = i;
+        while (j >= colors.length) {
+            j = j - colors.length;
+        }
+        color = colors[j];
 
-        _txv_class.setTextColor(colors[i]);
+        _txv_class.setTextColor(color);
 
         Boleta boleta = boletas.get(i);
         

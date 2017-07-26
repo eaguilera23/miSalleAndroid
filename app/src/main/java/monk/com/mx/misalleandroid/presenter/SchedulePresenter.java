@@ -31,8 +31,11 @@ public class SchedulePresenter {
     }
 
     public ArrayList<Clase> setScheduleForDayColors(ArrayList<Clase> scheduleForDay) {
-        for (int i = 0; i < scheduleForDay.size(); i++)
-            scheduleForDay.get(i).getMateria().setColor(colors[i]);
+        for (int i = 0, j = i; i < scheduleForDay.size(); i++, j++) {
+            if (j >= colors.length)
+                j = j - i;
+            scheduleForDay.get(i).getMateria().setColor(colors[j]);
+        }
 
         return scheduleForDay;
     }
