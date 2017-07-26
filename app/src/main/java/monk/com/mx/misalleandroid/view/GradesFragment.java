@@ -13,6 +13,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
@@ -62,6 +63,7 @@ public class GradesFragment extends Fragment {
 
         _lst_grades = (ExpandableListView)_v.findViewById(R.id.lst_grades);
         ArrayList<Boleta> grades = gradesPresenter.getGrades(period);
+        grades.removeAll(Collections.singleton(null));
         gradesAdapter = new GradesExListViewAdapter(inflater, grades);
 
         _lst_grades.setAdapter(gradesAdapter);
@@ -77,11 +79,7 @@ public class GradesFragment extends Fragment {
 
     public void UpdatePeriodsView(){
         MainActivity activity = (MainActivity)getActivity();
-//        MenuItem item = activity.getNavigationView().getMenu().findItem(R.id.nav_grades);
-//        item.setChecked(true);
-//
-//        activity.getNavigationViewListener().onNavigationItemSelected(item);
-//        activity.
+
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         GradesFragment newFragment = new GradesFragment();
         Bundle bundle = new Bundle();
