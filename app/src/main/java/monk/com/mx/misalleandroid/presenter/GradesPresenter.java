@@ -58,4 +58,8 @@ public class GradesPresenter {
         scrapperRequest = new ScrapperRequest();
         scrapperRequest.getPeriodosRequest(user, this);
     }
+
+    public void OnError() {
+        gradesFragment.OnRefreshError();
+    }
 }

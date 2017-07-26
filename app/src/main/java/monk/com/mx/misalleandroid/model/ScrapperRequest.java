@@ -141,12 +141,14 @@ public class ScrapperRequest {
                     InformationManager informationManager = new InformationManager();
                     informationManager.setPeriodos(result.getPeriodos());
                     presenter.setPeriodos();
+                }else{
+                    presenter.OnError();
                 }
             }
 
             @Override
             public void onFailure(Call<PeriodosResult> call, Throwable t) {
-
+                presenter.OnError();
             }
         });
     }
