@@ -20,6 +20,7 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
 
     LayoutInflater inflater;
     private ArrayList<Boleta> boletas;
+    private static final String TIPO_EXTRAORDINARIO = "EXTRAORDINARIO";
 
     public GradesExListViewAdapter(LayoutInflater pInflater, ArrayList<Boleta> content){
         inflater = pInflater;
@@ -69,6 +70,7 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
         TextView _txv_teacher = (TextView)_v.findViewById(R.id.txv_teacher_list_grades);
         TextView _txv_final_grade = (TextView)_v.findViewById(R.id.txv_final_grade_list_grades);
         TextView _txv_absences = (TextView)_v.findViewById(R.id.txv_absences_list_grades);
+        TextView _txv_extraordinario = (TextView)_v.findViewById(R.id.txv_extraordinario_list_grades);
         ImageView _img_arrow = (ImageView)_v.findViewById(R.id.img_arrow_list_grades);
 
         if(isExpanded){
@@ -91,6 +93,9 @@ public class GradesExListViewAdapter extends BaseExpandableListAdapter {
         Boleta boleta = boletas.get(i);
         
         _txv_class.setText(boleta.getMateria().getNombre());
+        if (boleta.getTipo().equals(TIPO_EXTRAORDINARIO)){
+            _txv_extraordinario.setText("Extraordinario");
+        }
 
         _txv_teacher.setText(boleta.getProfesor().getNombre());
         _txv_final_grade.setText(String.valueOf(boleta.getParciales().get(4).getCalificacion()));
