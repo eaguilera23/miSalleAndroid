@@ -1,8 +1,12 @@
 package monk.com.mx.misalleandroid.presenter;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.model.InformationManager;
 import monk.com.mx.misalleandroid.model.ScrapperRequest;
@@ -19,11 +23,13 @@ public class LoadingPresenter {
     private String _matricula, _password;
     private InformationManager informationManager;
     private ScrapperRequest scrapperRequest;
+    private FirebaseAuth firebaseAuth;
 
     public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
         this.loadingActivity = loadingActivity;
         this._matricula = pMatricula;
         this._password = pPassword;
+        this.firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void LoadInformation(){
@@ -35,15 +41,42 @@ public class LoadingPresenter {
     public void onRequestResponse(Alumno alumno){
         informationManager = new InformationManager();
         informationManager.setUserInformation(alumno);
-
-        Context context = MyApplication.getContext();
-        String preferencesFile = MyApplication.getPreferencesString();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("matricula", _matricula);
-        editor.commit();
+        informationManager.setMatriculaLocal(_matricula);
+        if (alumno.getNuevo_ingreso() == 1){
+            SignUpFirebase(alumno);
+        }else{
+            SignInFirebase(alumno);
+        }
 
         loadingActivity.onSuccessfulLoading();
+    }
+
+    private void SignUpFirebase(Alumno alumno) {
+        String email = getFirebaseEmail(_matricula);
+        firebaseAuth.createUserWithEmailAndPassword(email, _password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Toast toast = Toast.makeText(MyApplication.getContext(), "firebase registro funciona ", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    }
+                });
+    }
+
+    private void SignInFirebase(Alumno alumno) {
+        String email = getFirebaseEmail(_matricula);
+        firebaseAuth.signInWithEmailAndPassword(email, _password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Toast toast = Toast.makeText(MyApplication.getContext(), "firebase login funciona ", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    }
+                });
     }
 
     public void onErrorLoading(String error){
@@ -52,5 +85,9 @@ public class LoadingPresenter {
 
     public void setSession() {
         informationManager.setSession(true);
+    }
+
+    private String getFirebaseEmail(String matricula){
+        return matricula + "@monk.com.mx";
     }
 }

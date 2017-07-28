@@ -1,5 +1,8 @@
 package monk.com.mx.misalleandroid.presenter;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import monk.com.mx.misalleandroid.model.InformationManager;
 import monk.com.mx.misalleandroid.view.LoginActivity;
 
@@ -9,6 +12,7 @@ import monk.com.mx.misalleandroid.view.LoginActivity;
 public class LoginPresenter {
 
     private final LoginActivity activity;
+    private FirebaseAuth firebaseAuth;
 
     public LoginPresenter(LoginActivity pActivity) {
         this.activity = pActivity;
@@ -24,8 +28,11 @@ public class LoginPresenter {
         activity.navigateToLoadingActivity();
     }
 
-    public boolean isSessionActive() {
-        InformationManager informationManager = new InformationManager();
-        return informationManager.getSession();
+    public void CheckSession() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser current_user = firebaseAuth.getCurrentUser();
+        if (current_user != null) {
+            activity.navigateToMainActivity();
+        }
     }
 }

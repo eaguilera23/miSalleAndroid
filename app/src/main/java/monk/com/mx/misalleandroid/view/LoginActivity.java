@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.presenter.LoginPresenter;
 
@@ -21,16 +24,17 @@ public class LoginActivity extends AppCompatActivity {
     EditText txt_matricula, txt_password;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onStart() {
+        super.onStart();
 
         loginPresenter = new LoginPresenter(this);
-        boolean session = loginPresenter.isSessionActive();
-        if (session){
-            navigateToMainActivity();
-            return;
-        }
+        loginPresenter.CheckSession();
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
         loginPresenter = new LoginPresenter(this);

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "299475886376",
+    "firebase_url": "https://misalle-3ae7d.firebaseio.com",
+    "project_id": "misalle-3ae7d",
+    "storage_bucket": "misalle-3ae7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299475886376:android:3e8e0c4c3e19ea75",
+        "android_client_info": {
+          "package_name": "monk.com.mx.misalleandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299475886376-d77o8d5n29cbd065j850rgiph8fuk1a7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi5ad0z28ORSHsM7map21JrXLmaVP0r1E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

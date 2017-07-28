@@ -189,4 +189,12 @@ public class InformationManager {
         fileHandler.CreateFile("pagos", JsonHandler.SerializeObject(alumno.getPagos()));
     }
 
+    public void setMatriculaLocal(String matricula){
+        Context context = MyApplication.getContext();
+        String preferencesFile = MyApplication.getPreferencesString();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("matricula", matricula);
+        editor.commit();
+    }
 }

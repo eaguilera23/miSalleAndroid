@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
 
 import monk.com.mx.misalleandroid.domain.StringFormater;
@@ -20,12 +22,14 @@ public class MainPresenter {
 
     private MainActivity mainActivity;
     private InformationManager informationManager;
+    private FirebaseAuth firebaseAuth;
     private final int PICTURE_TAKEN_FROM_CAMERA = 1;
     private final int PICTURE_TAKEN_FROM_GALLERY = 2;
 
     public MainPresenter(MainActivity pActivity) {
         mainActivity = pActivity;
         informationManager = new InformationManager();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public AlumnoInfo getAlumnoInfo() {
@@ -82,5 +86,6 @@ public class MainPresenter {
     public void Logout() {
         informationManager.setSession(false);
         informationManager.DeleteProfilePicture();
+        firebaseAuth.signOut();
     }
 }

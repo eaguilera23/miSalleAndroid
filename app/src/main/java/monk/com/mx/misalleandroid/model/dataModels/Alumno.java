@@ -11,6 +11,7 @@ public class Alumno {
     private String nombre;
     private String apellido_m;
     private String apellido_p;
+    private String email;
     private Usuario usuario;
     private Campus campus;
     private Programa programa;
@@ -19,6 +20,7 @@ public class Alumno {
     private ArrayList<Periodo> periodos;
     private ArrayList<Falta> faltas;
     private ArrayList<Pago> pagos;
+    private Integer nuevo_ingreso;
     //endregion
 
     //region Encapsulation
@@ -116,6 +118,22 @@ public class Alumno {
 
     public void setPagos(ArrayList<Pago> pagos) {
         this.pagos = pagos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getNuevo_ingreso() {
+        return nuevo_ingreso;
+    }
+
+    public void setNuevo_ingreso(Integer nuevo_ingreso) {
+        this.nuevo_ingreso = nuevo_ingreso;
     }
     //endregion
 
