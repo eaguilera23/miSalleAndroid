@@ -54,7 +54,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorDarkGray"
                 android:inputType="textPassword"
-                android:paddingBottom="14dp" />
+                android:paddingBottom="14dp"
+                android:imeOptions="actionSend"/>
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
