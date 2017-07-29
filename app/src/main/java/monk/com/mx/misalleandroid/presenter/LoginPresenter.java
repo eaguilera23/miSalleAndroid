@@ -13,9 +13,12 @@ public class LoginPresenter {
 
     private final LoginActivity activity;
     private FirebaseAuth firebaseAuth;
+    InformationManager informationManager;
 
     public LoginPresenter(LoginActivity pActivity) {
+
         this.activity = pActivity;
+        informationManager = new InformationManager();
     }
 
     public void CheckFields(String txt_matricula, String txt_password) {
@@ -25,7 +28,11 @@ public class LoginPresenter {
             return;
         }
 
-        activity.navigateToLoadingActivity();
+        if (informationManager.isNetworkAvailable()) {
+            activity.navigateToLoadingActivity();
+        }else{
+            activity.NoNetworkAvailable();
+        }
     }
 
     public void CheckSession() {

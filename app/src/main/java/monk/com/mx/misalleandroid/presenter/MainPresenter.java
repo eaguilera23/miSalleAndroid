@@ -5,8 +5,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.io.IOException;
 
@@ -69,23 +74,48 @@ public class MainPresenter {
             default:
                 return;
         }
-        informationManager.setProfilePicture(picture);
-        setProfilePicture(picture);
+        informationManager.setProfilePicture(picture, this);
     }
 
-    private void setProfilePicture(Bitmap picture) {
-        mainActivity.setProfilePicture(picture);
+    public void setProfilePicture(Uri picture) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(picture)
+                .build();
+        firebaseUser.updateProfile(userProfileChangeRequest)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        mainActivity.setProfilePicture(user.getPhotoUrl());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mainActivity.onErrorProfilePictureUpdate();
+                    }
+                });
+
     }
 
     public void setProfilePicture() {
-        Bitmap picture = informationManager.getProfilePicture();
-        if (picture != null)
-            setProfilePicture(picture);
+        if (informationManager.isNetworkAvailable()) {
+            firebaseAuth = FirebaseAuth.getInstance();
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null && user.getPhotoUrl() != null) {
+                mainActivity.setProfilePicture(user.getPhotoUrl());
+            }
+        }else{
+            Bitmap profile_pic = informationManager.getProfilePicture();
+            mainActivity.setProfilePicture(profile_pic);
+        }
     }
 
     public void Logout() {
-        informationManager.setSession(false);
         informationManager.DeleteProfilePicture();
+        firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
     }
 }

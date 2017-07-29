@@ -5,7 +5,22 @@ import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -128,30 +143,46 @@ public class InformationManager {
         return bitmap;
     }
 
-    public void setProfilePicture(Bitmap picture) {
+    public void setProfilePicture(Bitmap picture, final MainPresenter mainPresenter) {
         ContextWrapper contextWrapper = new ContextWrapper(MyApplication.getContext());
         File directory = contextWrapper.getDir("img", Context.MODE_PRIVATE);
         File mypath = new File(directory, "profile.jpg");
         FileOutputStream fos = null;
-        try {
+        try{
             fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
             picture.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } finally {
+        }finally {
             try {
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
         Context context = MyApplication.getContext();
         String preferencesFile = MyApplication.getPreferencesString();
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("img_perfil", directory.getAbsolutePath());
         editor.commit();
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        StorageReference imageReference = storageReference.child(getMatricula() + "/profile.jpg");
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        picture.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask task = imageReference.putBytes(data);
+        task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Uri profile_url = taskSnapshot.getDownloadUrl();
+                mainPresenter.setProfilePicture(profile_url);
+            }
+        });
     }
 
     public void DeleteProfilePicture() {
@@ -160,22 +191,6 @@ public class InformationManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("img_perfil", null);
-        editor.commit();
-    }
-
-    public boolean getSession() {
-        Context context = MyApplication.getContext();
-        String preferencesFile = MyApplication.getPreferencesString();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("session", false);
-    }
-
-    public void setSession(boolean session) {
-        Context context = MyApplication.getContext();
-        String preferencesFile = MyApplication.getPreferencesString();
-        SharedPreferences sharedPreferences = context.getSharedPreferences(preferencesFile, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("session", session);
         editor.commit();
     }
 
@@ -196,5 +211,12 @@ public class InformationManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("matricula", matricula);
         editor.commit();
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) MyApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

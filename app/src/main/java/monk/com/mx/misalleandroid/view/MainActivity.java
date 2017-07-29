@@ -2,6 +2,7 @@ package monk.com.mx.misalleandroid.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -15,10 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.model.dataModels.AlumnoInfo;
 import monk.com.mx.misalleandroid.presenter.LoginPresenter;
@@ -107,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 
@@ -149,8 +154,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setProfilePicture(Bitmap picture) {
-        _img_profile.setImageBitmap(picture);
+    public void setProfilePicture(Uri picture) {
+
+        Picasso.with(MyApplication.getContext()).load(picture).into(_img_profile);
+    }
+
+    public void setProfilePicture(Bitmap profile_pic) {
+        if (profile_pic != null)
+            _img_profile.setImageBitmap(profile_pic);
     }
 
     public void Logout(){
@@ -174,5 +185,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setNavigationView(NavigationView navigationView) {
         this.navigationView = navigationView;
+    }
+
+    public void onErrorProfilePictureUpdate() {
+        Toast toast = Toast.makeText(MyApplication.getContext(), "Hubo un error al intentar actualizar to foto. Inténtalo más tarde", Toast.LENGTH_LONG);
+        toast.show();
     }
 }

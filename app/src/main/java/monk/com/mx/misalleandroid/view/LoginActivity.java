@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
 import monk.com.mx.misalleandroid.presenter.LoginPresenter;
 
@@ -75,5 +76,10 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    public void NoNetworkAvailable() {
+        Toast toast = Toast.makeText(this, "Necesitas una conexión a internet para el primer ingreso.", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

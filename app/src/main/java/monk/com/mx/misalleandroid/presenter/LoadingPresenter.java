@@ -43,37 +43,33 @@ public class LoadingPresenter {
         informationManager.setUserInformation(alumno);
         informationManager.setMatriculaLocal(_matricula);
         if (alumno.getNuevo_ingreso() == 1){
-            SignUpFirebase(alumno);
+            SignUpFirebase();
         }else{
-            SignInFirebase(alumno);
+            SignInFirebase();
         }
-
-        loadingActivity.onSuccessfulLoading();
     }
 
-    private void SignUpFirebase(Alumno alumno) {
+    private void SignUpFirebase() {
         String email = getFirebaseEmail(_matricula);
         firebaseAuth.createUserWithEmailAndPassword(email, _password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast toast = Toast.makeText(MyApplication.getContext(), "firebase registro funciona ", Toast.LENGTH_LONG);
-                            toast.show();
+                            loadingActivity.onSuccessfulLoading();
                         }
                     }
                 });
     }
 
-    private void SignInFirebase(Alumno alumno) {
+    private void SignInFirebase() {
         String email = getFirebaseEmail(_matricula);
         firebaseAuth.signInWithEmailAndPassword(email, _password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast toast = Toast.makeText(MyApplication.getContext(), "firebase login funciona ", Toast.LENGTH_LONG);
-                            toast.show();
+                            loadingActivity.onSuccessfulLoading();
                         }
                     }
                 });
@@ -81,10 +77,6 @@ public class LoadingPresenter {
 
     public void onErrorLoading(String error){
         loadingActivity.onErrorLoading(error);
-    }
-
-    public void setSession() {
-        informationManager.setSession(true);
     }
 
     private String getFirebaseEmail(String matricula){
