@@ -2,6 +2,7 @@ package monk.com.mx.misalleandroid.view.helpers;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +29,8 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
 
     private MainActivity mainActivity;
     FragmentTransaction fragmentTransaction;
+    FragmentManager fragmentManager;
+    Fragment fragment;
 
     public MainNavigationViewListener(MainActivity activity){
         mainActivity = activity;
@@ -38,35 +41,55 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
+        fragmentManager = mainActivity.getSupportFragmentManager();
+
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        AdvertisingFragment _advertising = new AdvertisingFragment();
-        fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
 
         switch (id){
             case R.id.nav_home:
-                mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
-                mainActivity.getSupportActionBar().setTitle(R.string.title_home);
-                HomeFragment _home = new HomeFragment();
-                fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
+                fragment = fragmentManager.findFragmentByTag("home");
+
+                if (fragment == null || !fragment.isVisible()) {
+                    AdvertisingFragment _advertising = new AdvertisingFragment();
+                    fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
+                    mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                    mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+                    mainActivity.getSupportActionBar().setTitle(R.string.title_home);
+                    HomeFragment _home = new HomeFragment();
+                    fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
+                    fragment = null;
+                }
                 break;
             case R.id.nav_grades:
-                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-                createDropDown();
-                Bundle bundle = new Bundle();
-                bundle.putInt("period", 0);
-                GradesFragment _grades = new GradesFragment();
-                _grades.setArguments(bundle);
-                fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
+                fragment = fragmentManager.findFragmentByTag("grades");
+
+                if (fragment == null || !fragment.isVisible()) {
+                    AdvertisingFragment _advertising = new AdvertisingFragment();
+                    fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
+                    mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+                    createDropDown();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("period", 0);
+                    GradesFragment _grades = new GradesFragment();
+                    _grades.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
+                    fragment = null;
+                }
                 break;
             case R.id.nav_schedule:
-                mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-                mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
-                mainActivity.getSupportActionBar().setTitle(R.string.title_schedule);
+                fragment = fragmentManager.findFragmentByTag("schedule");
 
-                ScheduleFragment _horario = new ScheduleFragment();
-                fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
+                if (fragment == null || !fragment.isVisible()) {
+                    AdvertisingFragment _advertising = new AdvertisingFragment();
+                    fragmentTransaction.replace(R.id.frag_ad_main, _advertising, "advertising");
+                    mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                    mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+                    mainActivity.getSupportActionBar().setTitle(R.string.title_schedule);
+
+                    ScheduleFragment _horario = new ScheduleFragment();
+                    fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
+                }
                 break;
             default:
                 break;
