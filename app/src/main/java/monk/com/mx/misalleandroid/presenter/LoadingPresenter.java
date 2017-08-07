@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import monk.com.mx.misalleandroid.MyApplication;
@@ -45,6 +46,13 @@ public class LoadingPresenter {
         informationManager = new InformationManager();
         informationManager.setUserInformation(alumno);
         informationManager.setMatriculaLocal(_matricula);
+        FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.getInstance(loadingActivity);
+
+        if (!(alumno.getPrograma().getNombre() == null || alumno.getPrograma().getNombre().equals(""))) {
+            firebaseAnalytics.setUserProperty("carrera", alumno.getPrograma().getNombre());
+        }else{
+            firebaseAnalytics.setUserProperty("carrera", "SIN_CARRERA");
+        }
         if (alumno.getNuevo_ingreso() == 1){
             SignUpFirebase();
         }else{
@@ -63,7 +71,6 @@ public class LoadingPresenter {
                             loadingActivity.onSuccessfulLoading();
                         }else{
                             Exception exception = task.getException();
-                            String s = "s";
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
