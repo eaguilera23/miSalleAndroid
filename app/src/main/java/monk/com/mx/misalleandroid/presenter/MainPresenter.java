@@ -78,6 +78,9 @@ public class MainPresenter {
     }
 
     public void setProfilePicture(Uri picture) {
+        Bitmap profile_pic = informationManager.getProfilePicture();
+        mainActivity.setProfilePicture(profile_pic);
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
@@ -101,15 +104,15 @@ public class MainPresenter {
     }
 
     public void setProfilePicture() {
+        Bitmap profile_pic = informationManager.getProfilePicture();
+        mainActivity.setProfilePicture(profile_pic);
+
         if (informationManager.isNetworkAvailable()) {
             firebaseAuth = FirebaseAuth.getInstance();
             FirebaseUser user = firebaseAuth.getCurrentUser();
             if (user != null && user.getPhotoUrl() != null) {
                 mainActivity.setProfilePicture(user.getPhotoUrl());
             }
-        }else{
-            Bitmap profile_pic = informationManager.getProfilePicture();
-            mainActivity.setProfilePicture(profile_pic);
         }
     }
 
