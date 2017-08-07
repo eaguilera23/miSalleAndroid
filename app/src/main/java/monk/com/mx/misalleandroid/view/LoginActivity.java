@@ -2,18 +2,29 @@ package monk.com.mx.misalleandroid.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import monk.com.mx.misalleandroid.MyApplication;
 import monk.com.mx.misalleandroid.R;
+import monk.com.mx.misalleandroid.model.dataModels.SistemaObject;
 import monk.com.mx.misalleandroid.presenter.LoginPresenter;
+import monk.com.mx.misalleandroid.view.helpers.LoginSpinnerAdapter;
 
 /**
  * Created by edago on 7/2/17.
@@ -23,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginPresenter loginPresenter;
 
     EditText txt_matricula, txt_password;
+    Spinner spinner_campus, spinner_sistema;
 
     @Override
     protected void onStart() {
@@ -42,10 +54,60 @@ public class LoginActivity extends AppCompatActivity {
 
         txt_matricula = (EditText)findViewById(R.id.txt_matricula_login);
         txt_password = (EditText)findViewById(R.id.txt_password_login);
+        spinner_campus = (Spinner)findViewById(R.id.spinner_campus_login);
+        spinner_sistema = (Spinner)findViewById(R.id.spinner_sistema_login);
+
+        inflateSpinnerCampus();
 
         String error = getIntent().getStringExtra("error");
         if (error != null)
             onFailedLogin(error);
+    }
+
+    private void inflateSpinnerCampus() {
+        SistemaObject[] campus = new SistemaObject[3];
+        campus[0] = new SistemaObject(0, "Lomas del campestre");
+        campus[1] = new SistemaObject(1, "Juan Alonso de Torres");
+        campus[2] = new SistemaObject(2, "Américas");
+
+        final LoginSpinnerAdapter spinnerAdapter = new LoginSpinnerAdapter(LoginActivity.this, R.layout.spinner_item_login, campus);
+        spinner_campus.setAdapter(spinnerAdapter);
+        spinner_campus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                SistemaObject seleccionado = spinnerAdapter.getItem(position);
+                inflateSpinnerSistema(seleccionado);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void inflateSpinnerSistema(SistemaObject seleccionado) {
+        SistemaObject[] sistemas;
+        switch (seleccionado.getSistema()){
+            case 0:
+                sistemas = new SistemaObject[1];
+                sistemas[0] = new SistemaObject(1, "Licenciatura");
+                break;
+            case 1:
+                sistemas = new SistemaObject[1];
+                sistemas[0] = new SistemaObject(43, "Preparatoria");
+                break;
+            case 2:
+                sistemas = new SistemaObject[1];
+                sistemas[0] = new SistemaObject(33, "Preparatoria");
+                break;
+            default:
+                sistemas = new SistemaObject[0];
+                break;
+        }
+
+        LoginSpinnerAdapter spinnerAdapter = new LoginSpinnerAdapter(LoginActivity.this, R.layout.spinner_item_login, sistemas);
+        spinner_sistema.setAdapter(spinnerAdapter);
     }
 
     private void onFailedLogin(String error) {
@@ -64,9 +126,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void navigateToLoadingActivity() {
+        SistemaObject seleccionado = (SistemaObject)spinner_sistema.getSelectedItem();
         Intent intent = new Intent(LoginActivity.this, LoadingActivity.class);
         intent.putExtra("matricula", txt_matricula.getText().toString());
         intent.putExtra("password", txt_password.getText().toString());
+        intent.putExtra("sistema", seleccionado.getSistema());
         startActivity(intent);
         finish();
     }

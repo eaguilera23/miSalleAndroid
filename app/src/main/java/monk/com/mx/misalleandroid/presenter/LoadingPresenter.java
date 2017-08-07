@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,19 +22,21 @@ public class LoadingPresenter {
 
     private LoadingActivity loadingActivity;
     private String _matricula, _password;
+    private Integer sistema;
     private InformationManager informationManager;
     private ScrapperRequest scrapperRequest;
     private FirebaseAuth firebaseAuth;
 
-    public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword) {
+    public LoadingPresenter(LoadingActivity loadingActivity, String pMatricula, String pPassword, Integer sistema) {
         this.loadingActivity = loadingActivity;
         this._matricula = pMatricula;
         this._password = pPassword;
+        this.sistema = sistema;
         this.firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void LoadInformation(){
-        Usuario user = new Usuario(_matricula, _password);
+        Usuario user = new Usuario(_matricula, _password, sistema);
         scrapperRequest = new ScrapperRequest();
         scrapperRequest.GetAlumnoRequest(user, this);
     }
@@ -47,6 +50,7 @@ public class LoadingPresenter {
         }else{
             SignInFirebase();
         }
+
     }
 
     private void SignUpFirebase() {
@@ -57,9 +61,17 @@ public class LoadingPresenter {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             loadingActivity.onSuccessfulLoading();
+                        }else{
+                            Exception exception = task.getException();
+                            String s = "s";
                         }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String error = e.getMessage();
+            }
+        });
     }
 
     private void SignInFirebase() {
@@ -72,7 +84,13 @@ public class LoadingPresenter {
                             loadingActivity.onSuccessfulLoading();
                         }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String m = e.getMessage();
+            }
+        });
+
     }
 
     public void onErrorLoading(String error){

@@ -21,7 +21,8 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
         String matricula = getIntent().getStringExtra("matricula");
         String password = getIntent().getStringExtra("password");
-        loadingPresenter = new LoadingPresenter(this, matricula, password);
+        Integer sistema = getIntent().getIntExtra("sistema", 0);
+        loadingPresenter = new LoadingPresenter(this, matricula, password, sistema);
 
         loadingPresenter.LoadInformation();
     }

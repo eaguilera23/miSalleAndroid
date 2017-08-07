@@ -8,6 +8,7 @@ public class Usuario {
     //region Fields
     private String matricula;
     private String password;
+    private Integer sistema;
     //endregion
 
     //region Encapsulation
@@ -31,9 +32,18 @@ public class Usuario {
     //region Constructors
     public Usuario(){}
 
-    public Usuario(String _matricula, String _password){
+    public Usuario(String _matricula, String _password, Integer _sistema){
         this.matricula = _matricula;
         this.password = _password;
+        this.sistema = _sistema;
+    }
+
+    public Integer getSistema() {
+        return sistema;
+    }
+
+    public void setSistema(Integer sistema) {
+        this.sistema = sistema;
     }
     //endregion
 }

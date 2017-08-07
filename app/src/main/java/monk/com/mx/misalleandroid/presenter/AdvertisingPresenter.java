@@ -28,7 +28,7 @@ public class AdvertisingPresenter {
     }
 
     private void getAdvertisingImage(){
-        Usuario dummyData = new Usuario("a", "a");
+        Usuario dummyData = new Usuario("a", "a", 0);
         scrapperRequest.getAdvertisingRequest(dummyData, this);
     }
 

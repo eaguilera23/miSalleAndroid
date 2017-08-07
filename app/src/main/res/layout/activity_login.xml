@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
@@ -15,67 +15,120 @@
             android:src="@mipmap/bg_patterns_school"
             android:scaleType="centerCrop"/>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:padding="30dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
-                android:maxLength="8"
-                android:hint="@string/enrollment"
                 android:id="@+id/txt_matricula_login"
-                android:inputType="numberSigned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:hint="@string/enrollment"
+                android:inputType="numberSigned"
+                android:maxLength="8"
                 android:paddingBottom="14dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorDarkGray"/>
+                android:textColor="@color/colorDarkGray" />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="8dp"
-                android:src="@mipmap/ic_profile_black"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_profile_black" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <EditText
-                android:hint="@string/password"
                 android:id="@+id/txt_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
-                android:textAlignment="center"
-                android:textColor="@color/colorDarkGray"
+                android:hint="@string/password"
+                android:imeOptions="actionSend"
                 android:inputType="textPassword"
                 android:paddingBottom="14dp"
-                android:imeOptions="actionSend"/>
+                android:textAlignment="center"
+                android:textColor="@color/colorDarkGray" />
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="8dp"
-                android:src="@mipmap/ic_key_black"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_key_black" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Campus: "
+                android:textColor="@color/gray"
+                android:textSize="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_campus_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Nivel: "
+                android:textColor="@color/gray"
+                android:textSize="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_sistema_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+        </LinearLayout>
+
         <Button
-            android:background="@drawable/rounded_rec_orange"
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/rounded_rec_orange"
+            android:onClick="onLoginClick"
             android:text="@string/sign_in"
             android:textColor="@color/colorWhite"
             android:textSize="18dp"
-            android:textStyle="bold"
-            android:onClick="onLoginClick" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
