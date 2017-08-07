@@ -40,8 +40,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre de la materia"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16dp"
                 android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,8 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Pago febrero 2017"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="15dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txv_due_date_date_home"
@@ -143,8 +143,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="30dp"
                     android:text="@string/remaining_days"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14dp"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txv_remaining_days_home"
                     android:layout_width="35dp"
@@ -207,7 +208,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/cultural"
                     android:textColor="@color/colorWhite"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txv_creditos_cultural_home"
@@ -233,7 +234,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/deportivo"
                     android:textColor="@color/colorWhite"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txv_creditos_deportivo_home"
@@ -259,7 +260,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/social"
                     android:textColor="@color/colorWhite"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
                 <TextView
                     android:id="@+id/txv_creditos_social_home"
