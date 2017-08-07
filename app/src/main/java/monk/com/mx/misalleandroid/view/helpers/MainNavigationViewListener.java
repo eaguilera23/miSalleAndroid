@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 
 import monk.com.mx.misalleandroid.MyApplication;
@@ -31,6 +33,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     Fragment fragment;
+    private FirebaseAnalytics firebaseAnalytics;
 
     public MainNavigationViewListener(MainActivity activity){
         mainActivity = activity;
@@ -46,6 +49,9 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
+        firebaseAnalytics = FirebaseAnalytics.getInstance(mainActivity);
+        Bundle event = new Bundle();
+
         switch (id){
             case R.id.nav_home:
                 fragment = fragmentManager.findFragmentByTag("home");
@@ -59,6 +65,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     HomeFragment _home = new HomeFragment();
                     fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
                     fragment = null;
+                    event.putString("item", "home");
                 }
                 break;
             case R.id.nav_grades:
@@ -75,6 +82,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     _grades.setArguments(bundle);
                     fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
                     fragment = null;
+                    event.putString("item", "grades");
                 }
                 break;
             case R.id.nav_schedule:
@@ -89,12 +97,15 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
 
                     ScheduleFragment _horario = new ScheduleFragment();
                     fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
+                    fragment = null;
+                    event.putString("item", "schedule");
                 }
                 break;
             default:
                 break;
         }
 
+        firebaseAnalytics.logEvent("navigation", event);
         fragmentTransaction.commit();
         DrawerLayout drawer = (DrawerLayout) mainActivity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
