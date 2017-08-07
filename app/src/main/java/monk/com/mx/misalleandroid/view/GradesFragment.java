@@ -79,14 +79,15 @@ public class GradesFragment extends Fragment {
 
     public void UpdatePeriodsView(){
         MainActivity activity = (MainActivity)getActivity();
-
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        GradesFragment newFragment = new GradesFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("period", period);
-        newFragment.setArguments(bundle);
-        swipeRefreshLayout.setRefreshing(false);
-        fragmentManager.beginTransaction().replace(R.id.frag_content_main, newFragment, "grades").commit();
+        if  (activity != null) {
+            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+            GradesFragment newFragment = new GradesFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("period", period);
+            newFragment.setArguments(bundle);
+            swipeRefreshLayout.setRefreshing(false);
+            fragmentManager.beginTransaction().replace(R.id.frag_content_main, newFragment, "grades").commit();
+        }
     }
 
     public void OnRefreshError() {
