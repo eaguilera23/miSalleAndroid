@@ -24,12 +24,15 @@ public interface ScrapperService {
     @POST("anuncio")
     Call<Anuncio>getAdvertisingInfo(@Body Usuario usuario);
 
-    @POST("click")
-    Call<Anuncio> setClickOnAdvertising(@Body Click click);
-
     @POST("creditos")
     Call<CreditosResult> getCreditos(@Body Usuario usuario);
 
     @POST("periodos")
     Call<PeriodosResult> getPeriodos(@Body Usuario usuario);
+
+    @POST("feedback")
+    Call<Feedback> setFeedback(@Body Feedback feedback);
+
+    @POST("click")
+    Call<Anuncio> setClickOnAdvertising(@Body Click click);
 }

@@ -21,6 +21,7 @@ import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.view.AdvertisingFragment;
 import monk.com.mx.misalleandroid.view.GradesFragment;
 import monk.com.mx.misalleandroid.view.HomeFragment;
+import monk.com.mx.misalleandroid.view.InformationFragment;
 import monk.com.mx.misalleandroid.view.MainActivity;
 import monk.com.mx.misalleandroid.view.ScheduleFragment;
 
@@ -99,6 +100,20 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
                     fragment = null;
                     event.putString("item", "schedule");
+                }
+                break;
+            case R.id.nav_info:
+                fragment = fragmentManager.findFragmentByTag("info");
+
+                if (fragment == null || !fragment.isVisible()){
+                    mainActivity.getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+                    mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+                    mainActivity.getSupportActionBar().setTitle(R.string.title_info);
+
+                    InformationFragment _info = new InformationFragment();
+                    fragmentTransaction.replace(R.id.frag_content_main, _info, "info");
+                    fragment = null;
+                    event.putString("item", "info");
                 }
                 break;
             default:

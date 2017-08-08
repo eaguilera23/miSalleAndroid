@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">miSalleAndroid</string>
+    <string name="app_version">v1.0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -14,6 +15,7 @@
     <string name="title_home">Inicio</string>
     <string name="title_schedule">Horario</string>
     <string name="title_grades">Calificaciones</string>
+    <string name="title_info">Info</string>
     <string name="title_sign_out">Salir</string>
     <!-- home -->
     <string name="next_class">Próxima clase </string>

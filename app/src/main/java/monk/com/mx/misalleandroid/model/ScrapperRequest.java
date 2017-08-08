@@ -4,12 +4,14 @@ import monk.com.mx.misalleandroid.model.dataModels.Alumno;
 import monk.com.mx.misalleandroid.model.dataModels.Anuncio;
 import monk.com.mx.misalleandroid.model.dataModels.Click;
 import monk.com.mx.misalleandroid.model.dataModels.CreditosResult;
+import monk.com.mx.misalleandroid.model.dataModels.Feedback;
 import monk.com.mx.misalleandroid.model.dataModels.PeriodosResult;
 import monk.com.mx.misalleandroid.model.dataModels.ScrapperService;
 import monk.com.mx.misalleandroid.model.dataModels.Usuario;
 import monk.com.mx.misalleandroid.presenter.AdvertisingPresenter;
 import monk.com.mx.misalleandroid.presenter.GradesPresenter;
 import monk.com.mx.misalleandroid.presenter.HomePresenter;
+import monk.com.mx.misalleandroid.presenter.InformationPresenter;
 import monk.com.mx.misalleandroid.presenter.LoadingPresenter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -152,6 +154,30 @@ public class ScrapperRequest {
             @Override
             public void onFailure(Call<PeriodosResult> call, Throwable t) {
                 presenter.OnError();
+            }
+        });
+    }
+
+    public void setFeedbackRequest(Feedback feedback, final InformationPresenter informationPresenter) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ScrapperService scrapperService = retrofit.create(ScrapperService.class);
+        final Call<Feedback> feedbackCall = scrapperService.setFeedback(feedback);
+        feedbackCall.enqueue(new Callback<Feedback>() {
+            @Override
+            public void onResponse(Call<Feedback> call, Response<Feedback> response) {
+                if (response.isSuccessful()){
+                    informationPresenter.onSuccesfulRequest();
+                }else{
+                    informationPresenter.onErrorRequest();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Feedback> call, Throwable t) {
+                informationPresenter.onErrorRequest();
             }
         });
     }

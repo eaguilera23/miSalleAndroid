@@ -18,6 +18,10 @@
             android:id="@+id/nav_grades"
             android:title="@string/title_grades"
             android:icon="@mipmap/ic_grades"/>
+        <item
+            android:id="@+id/nav_info"
+            android:title="@string/title_info"
+            android:icon="@drawable/ic_info" />
     </group>
 
 </menu>
