@@ -57,7 +57,7 @@ public class SchedulePresenter {
             case Calendar.WEDNESDAY:
             case Calendar.THURSDAY:
             case Calendar.FRIDAY:
-                return day - 1;
+                return day - 2;
             case Calendar.SATURDAY:
                 return 0;
             default:

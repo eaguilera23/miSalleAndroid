@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp">
         <TextView
+            android:id="@+id/txv_title_next_class_home"
             android:background="@color/colorOrangeAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,15 +27,18 @@
             android:background="@color/colorOrangeAccent"
             android:layout_width="match_parent"
             android:layout_height="5dp"></LinearLayout>
+
         <LinearLayout
+            android:id="@+id/lnr_next_class_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@mipmap/bg_white"
             android:orientation="vertical"
-            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingBottom="12dp"
-            android:background="@mipmap/bg_white">
+            android:paddingTop="12dp">
+
             <TextView
                 android:id="@+id/txv_next_class_name_home"
                 android:layout_width="wrap_content"
@@ -43,38 +47,43 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16dp"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@mipmap/ic_alarm"/>
+                    android:src="@mipmap/ic_alarm" />
+
                 <TextView
                     android:id="@+id/txv_next_class_hour_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
                     android:text="11:00-12:00"
                     android:textColor="@color/colorOrangeAccent"
-                    android:textSize="13dp"/>
+                    android:textSize="13dp" />
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="15dp"
-                    android:src="@mipmap/ic_apple"/>
+                    android:src="@mipmap/ic_apple" />
+
                 <TextView
                     android:id="@+id/txv_next_class_teacher_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="4dp"
+                    android:layout_marginTop="2dp"
                     android:text="Nombre profe"
                     android:textColor="@color/colorOrangeAccent"
-                    android:textSize="13dp"/>
+                    android:textSize="13dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

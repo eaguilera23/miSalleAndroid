@@ -64,6 +64,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     mainActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
                     mainActivity.getSupportActionBar().setTitle(R.string.title_home);
                     HomeFragment _home = new HomeFragment();
+                    _home.setActivity(mainActivity);
                     fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
                     fragment = null;
                     event.putString("item", "home");

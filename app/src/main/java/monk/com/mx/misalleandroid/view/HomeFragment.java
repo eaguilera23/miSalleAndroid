@@ -1,9 +1,12 @@
 package monk.com.mx.misalleandroid.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -25,16 +28,21 @@ import monk.com.mx.misalleandroid.presenter.HomePresenter;
 public class HomeFragment extends Fragment {
 
     HomePresenter homePresenter;
+    MainActivity activity;
 
     public HomeFragment() {
 
     }
 
+    public void setActivity(MainActivity activity){
+        this.activity = activity;
+    }
+
     TextView _txv_next_class_name, txv_next_class_hour, txv_next_class_teacher,
             _txv_creditos_cultural, txv_creditos_deportivo, txv_creditos_social,
             _txv_pay_due_date_date_home, _txv_pay_due_date_name_home, _txv_remaining_days_home,
-            _txv_payment_header, _txv_refresh_creditos;
-    LinearLayout _txv_payment_line_header;
+            _txv_payment_header, _txv_refresh_creditos, txv_title_next_class;
+    LinearLayout _txv_payment_line_header, lnr_next_class_home;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +67,22 @@ public class HomeFragment extends Fragment {
         _txv_refresh_creditos.setTypeface(FontManager.getTypeface(FontManager.FONTAWESOME));
 
         homePresenter = new HomePresenter(this);
+
+        txv_title_next_class = (TextView)v.findViewById(R.id.txv_title_next_class_home);
+        txv_title_next_class.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSchedule();
+            }
+        });
+
+        lnr_next_class_home = (LinearLayout)v.findViewById(R.id.lnr_next_class_home);
+        lnr_next_class_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSchedule();
+            }
+        });
 
         return v;
     }
@@ -105,6 +129,14 @@ public class HomeFragment extends Fragment {
         _txv_payment_header.setBackgroundColor(color);
         _txv_payment_line_header.setBackgroundColor(color);
         _txv_pay_due_date_date_home.setTextColor(color);
+
+    }
+
+    private void goToSchedule(){
+        MenuItem item = activity.getNavigationView().getMenu().findItem(R.id.nav_schedule);
+        item.setChecked(true);
+
+        activity.getNavigationViewListener().onNavigationItemSelected(item);
 
     }
 }
