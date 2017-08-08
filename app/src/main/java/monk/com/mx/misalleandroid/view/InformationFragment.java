@@ -61,4 +61,10 @@ public class InformationFragment extends Fragment {
         Toast toast = Toast.makeText(MyApplication.getContext(), "Algo no funcionó. Por favor inténtalo más tarde.\nTu opinión es muy importante", Toast.LENGTH_LONG);
         toast.show();
     }
+
+    public void OnRecentFeedback() {
+        btn_send_feedback.setText("Enviar");
+        Toast toast = Toast.makeText(MyApplication.getContext(), "Te escuchamos con atención", Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
