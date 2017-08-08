@@ -35,6 +35,7 @@ public class InformationFragment extends Fragment {
         btn_send_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                btn_send_feedback.setText("Enviando...");
                 String feedback = txt_feedback.getText().toString();
                 informationPresenter.sendFeedback(feedback);
             }
@@ -50,11 +51,13 @@ public class InformationFragment extends Fragment {
 
     public void onFeedbackSent() {
         txt_feedback.setText("");
+        btn_send_feedback.setText("Enviar");
         Toast toast = Toast.makeText(MyApplication.getContext(), "¡Gracias!", Toast.LENGTH_SHORT);
         toast.show();
     }
 
     public void onErrorRequest() {
+        btn_send_feedback.setText("Enviar");
         Toast toast = Toast.makeText(MyApplication.getContext(), "Algo no funcionó. Por favor inténtalo más tarde.\nTu opinión es muy importante", Toast.LENGTH_LONG);
         toast.show();
     }

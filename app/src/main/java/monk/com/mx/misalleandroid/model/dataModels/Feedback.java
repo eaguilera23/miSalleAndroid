@@ -5,15 +5,15 @@ package monk.com.mx.misalleandroid.model.dataModels;
  */
 
 public class Feedback {
-    private String usuario_matricula;
+    private String matricula;
     private String texto;
 
-    public String getUsuario_matricula() {
-        return usuario_matricula;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setUsuario_matricula(String usuario_matricula) {
-        this.usuario_matricula = usuario_matricula;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
     public String getTexto() {
@@ -29,7 +29,7 @@ public class Feedback {
     }
 
     public Feedback(String matricula, String texto){
-        this.usuario_matricula = matricula;
+        this.matricula = matricula;
         this.texto = texto;
     }
 }

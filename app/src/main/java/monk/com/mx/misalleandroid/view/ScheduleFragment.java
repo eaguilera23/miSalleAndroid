@@ -41,7 +41,10 @@ public class ScheduleFragment extends Fragment {
 
         PagerAdapter pagerAdapter = new SchedulePageAdapter(getFragmentManager(), schedulePresenter, week);
 
+        int position = schedulePresenter.getDayOfWeek();
+
         _pgr_week.setAdapter(pagerAdapter);
+        _pgr_week.setCurrentItem(position);
         _tab_layout.setupWithViewPager(_pgr_week);
 
         return v;

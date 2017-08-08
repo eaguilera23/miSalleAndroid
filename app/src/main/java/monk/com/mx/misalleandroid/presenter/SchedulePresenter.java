@@ -1,6 +1,7 @@
 package monk.com.mx.misalleandroid.presenter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -42,5 +43,25 @@ public class SchedulePresenter {
 
     public void setColors(int[] pColors){
         colors = pColors;
+    }
+
+    public int getDayOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day){
+            case Calendar.SUNDAY:
+            case Calendar.MONDAY:
+                return 0;
+            case Calendar.TUESDAY:
+            case Calendar.WEDNESDAY:
+            case Calendar.THURSDAY:
+            case Calendar.FRIDAY:
+                return day - 1;
+            case Calendar.SATURDAY:
+                return 0;
+            default:
+                return 0;
+        }
     }
 }
