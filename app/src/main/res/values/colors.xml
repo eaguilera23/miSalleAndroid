@@ -22,14 +22,14 @@
 
 
     <array name="colors_class">
-        <item>@color/colorOrangeAccent</item>
         <item>@color/colorBlue</item>
-        <item>@color/colorGreen</item>
         <item>@color/colorOrangeAccent</item>
+        <item>@color/colorGreen</item>
+        <!-- <item>@color/colorOrangeAccent</item> -->
         <item>@color/colorBlueDark</item>
         <item>@color/colorGreenAccent</item>
         <item>@color/colorAccent</item>
         <item>@color/colorBlueAccent</item>
-        <item>@color/colorGreen2</item>
+        <!-- <item>@color/colorGreen2</item> -->
     </array>
 </resources>
