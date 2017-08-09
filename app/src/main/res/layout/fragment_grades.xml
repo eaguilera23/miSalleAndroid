@@ -10,7 +10,7 @@
         android:id="@+id/refresh_grades_container">
 
         <ExpandableListView
-            android:background="@color/colorWhite"
+            android:background="@color/colorBackground"
             android:divider="@color/colorPrimary"
             android:dividerHeight="1dp"
             android:id="@+id/lst_grades"

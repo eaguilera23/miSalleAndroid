@@ -1,5 +1,9 @@
 package monk.com.mx.misalleandroid.view;
 
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import monk.com.mx.misalleandroid.MyApplication;
@@ -25,12 +30,15 @@ public class InformationFragment extends Fragment {
 
     private EditText txt_feedback;
     private Button btn_send_feedback;
+    private ImageView img_fb;
+    private static final String FB_PAGE = "https://www.facebook.com/misallemx/";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_info, container, false);
 
         txt_feedback = (EditText)v.findViewById(R.id.txt_feedback_info);
         btn_send_feedback = (Button)v.findViewById(R.id.btn_send_feedback_info);
+        img_fb = (ImageView)v.findViewById(R.id.img_fb_info);
 
         btn_send_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +49,33 @@ public class InformationFragment extends Fragment {
             }
         });
 
+        img_fb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendToFbApp();
+            }
+        });
+
         return v;
+    }
+
+    private void SendToFbApp() {
+        Uri uri = Uri.parse(FB_PAGE);
+
+        PackageManager pm = MyApplication.getContext().getPackageManager();
+
+        try {
+            ApplicationInfo applicationinfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationinfo.enabled){
+                uri = uri.parse("fb://facewebmodal/f?href=" + FB_PAGE);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+
+        }
+
+        Intent fbIntent = new Intent(Intent.ACTION_VIEW);
+        fbIntent.setData(uri);
+        startActivity(fbIntent);
     }
 
     public void onEmptyFeedback() {

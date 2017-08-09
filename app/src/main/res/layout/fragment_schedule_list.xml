@@ -6,7 +6,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/colorBackground"
         android:id="@+id/lst_schedule"
         android:divider="@color/colorPrimary"
         android:dividerHeight="1dp"

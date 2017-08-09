@@ -68,6 +68,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     fragmentTransaction.replace(R.id.frag_content_main, _home, "home");
                     fragment = null;
                     event.putString("item", "home");
+                    firebaseAnalytics.logEvent("navigation", event);
                 }
                 break;
             case R.id.nav_grades:
@@ -85,6 +86,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     fragmentTransaction.replace(R.id.frag_content_main, _grades, "grades");
                     fragment = null;
                     event.putString("item", "grades");
+                    firebaseAnalytics.logEvent("navigation", event);
                 }
                 break;
             case R.id.nav_schedule:
@@ -101,6 +103,7 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     fragmentTransaction.replace(R.id.frag_content_main, _horario, "schedule");
                     fragment = null;
                     event.putString("item", "schedule");
+                    firebaseAnalytics.logEvent("navigation", event);
                 }
                 break;
             case R.id.nav_info:
@@ -115,13 +118,13 @@ public class MainNavigationViewListener implements NavigationView.OnNavigationIt
                     fragmentTransaction.replace(R.id.frag_content_main, _info, "info");
                     fragment = null;
                     event.putString("item", "info");
+                    firebaseAnalytics.logEvent("navigation", event);
                 }
                 break;
             default:
                 break;
         }
 
-        firebaseAnalytics.logEvent("navigation", event);
         fragmentTransaction.commit();
         DrawerLayout drawer = (DrawerLayout) mainActivity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

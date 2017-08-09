@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorBackground">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,14 +19,14 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/frag_content_main"
         android:layout_marginTop="58dp"
-        android:layout_marginBottom="70dp">
+        android:layout_marginBottom="60dp">
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:id="@+id/frag_ad_main"
         android:layout_gravity="center_horizontal|bottom">
     </FrameLayout>
