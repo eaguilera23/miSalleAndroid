@@ -4,24 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/bg_patterns_school"
-            android:scaleType="centerCrop"/>
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:padding="30dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/hd_logo_misalle_color"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="80dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,7 +57,8 @@
                 android:inputType="textPassword"
                 android:paddingBottom="14dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorDarkGray" />
+                android:textColor="@color/colorDarkGray"
+                android:fontFamily="sans-serif"/>
 
             <ImageView
                 android:layout_width="30dp"
@@ -78,13 +75,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
                 android:text="Campus: "
                 android:textColor="@color/gray"
-                android:textSize="20dp"
-                android:layout_marginRight="20dp"/>
+                android:textSize="20dp" />
 
             <Spinner
                 android:id="@+id/spinner_campus_login"
@@ -101,13 +98,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
                 android:text="Nivel: "
                 android:textColor="@color/gray"
                 android:textSize="20dp"
-                android:layout_marginRight="20dp"/>
+                android:textAlignment="textEnd"/>
 
             <Spinner
                 android:id="@+id/spinner_sistema_login"
@@ -129,6 +127,14 @@
             android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textAlignment="center"
+            android:text="Al iniciar sesión, aceptas nuestros términos y condiciones y aviso de privacidad"
+            />
 
     </LinearLayout>
 
