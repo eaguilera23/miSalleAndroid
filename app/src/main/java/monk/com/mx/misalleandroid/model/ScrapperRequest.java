@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ScrapperRequest {
 
-    private String BASE_URL = "http://pruebatarea2302.herokuapp.com/api/v1/";
+    private String BASE_URL = "http://misalle.herokuapp.com/api/v1/";
 
     public ScrapperRequest(){
 

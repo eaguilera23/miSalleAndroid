@@ -79,7 +79,7 @@ public class InformationFragment extends Fragment {
     }
 
     public void onEmptyFeedback() {
-        Toast toast = Toast.makeText(MyApplication.getContext(), "Mándanos lo que quieras, pero mándanos algo", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(MyApplication.getContext(), "Te escuchamos con atención", Toast.LENGTH_SHORT);
         toast.show();
     }
 
