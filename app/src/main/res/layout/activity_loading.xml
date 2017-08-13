@@ -9,23 +9,24 @@
         android:scaleType="centerCrop"/>
     <LinearLayout
         android:gravity="center_horizontal"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_logo_salle_blanco"/>
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/hd_logo_misalle_blanco"/>
         <TextView
             android:id="@+id/txv_loading_cont"
             android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="@string/loading"
             android:textColor="@color/colorWhite"
             android:textSize="19dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textAlignment="center"/>
     </LinearLayout>
 </RelativeLayout>

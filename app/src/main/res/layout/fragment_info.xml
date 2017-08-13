@@ -11,15 +11,17 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/hd_logo_misalle_color"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LOGO"
-            android:textSize="40dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Por Eduardo Aguilera"/>
+            android:text="Hecho por estudiantes, para estudiantes"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dinos tu opinión:"
-            android:textSize="25sp"
             android:layout_marginLeft="20dp"
             android:textColor="@color/colorPrimaryDark"/>
         <EditText
@@ -68,12 +69,12 @@
             android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="30dp"/>
         <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Terminos y condiciones"
+        android:text="Terminos y condiciones. Aviso de privacidad"
         android:gravity="center"
         android:textColor="@color/colorBlue"/>
         <TextView
