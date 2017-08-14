@@ -15,9 +15,9 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/hd_logo_misalle_color"
+            android:layout_marginBottom="80dp"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="80dp"/>
+            android:src="@mipmap/hd_logo_misalle_color" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,13 +52,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
+                android:fontFamily="sans-serif"
                 android:hint="@string/password"
                 android:imeOptions="actionSend"
                 android:inputType="textPassword"
                 android:paddingBottom="14dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorDarkGray"
-                android:fontFamily="sans-serif"/>
+                android:textColor="@color/colorDarkGray" />
 
             <ImageView
                 android:layout_width="30dp"
@@ -103,9 +103,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:text="Nivel: "
+                android:textAlignment="textEnd"
                 android:textColor="@color/gray"
-                android:textSize="20dp"
-                android:textAlignment="textEnd"/>
+                android:textSize="20dp" />
 
             <Spinner
                 android:id="@+id/spinner_sistema_login"
@@ -129,12 +129,12 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txv_privacidad_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:textAlignment="center"
             android:text="Al iniciar sesión, aceptas nuestros términos y condiciones y aviso de privacidad"
-            />
+            android:textAlignment="center" />
 
     </LinearLayout>
 

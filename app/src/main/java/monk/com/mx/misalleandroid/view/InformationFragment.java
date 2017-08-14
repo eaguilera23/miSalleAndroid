@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import monk.com.mx.misalleandroid.MyApplication;
@@ -29,6 +30,7 @@ public class InformationFragment extends Fragment {
     }
 
     private EditText txt_feedback;
+    private TextView txv_privacidad;
     private Button btn_send_feedback;
     private ImageView img_fb;
     private static final String FB_PAGE = "https://www.facebook.com/misallemx/";
@@ -53,6 +55,15 @@ public class InformationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SendToFbApp();
+            }
+        });
+
+        txv_privacidad = (TextView)v.findViewById(R.id.txv_privacidad_info);
+        txv_privacidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.misalle.com.mx/privacidad.pdf"));
+                startActivity(browserIntent);
             }
         });
 

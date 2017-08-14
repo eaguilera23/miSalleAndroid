@@ -3,6 +3,7 @@ package monk.com.mx.misalleandroid.view;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginPresenter loginPresenter;
 
     EditText txt_matricula, txt_password;
+    TextView txv_privacidad;
     Spinner spinner_campus, spinner_sistema;
 
     @Override
@@ -57,6 +60,15 @@ public class LoginActivity extends AppCompatActivity {
         spinner_campus = (Spinner)findViewById(R.id.spinner_campus_login);
         spinner_sistema = (Spinner)findViewById(R.id.spinner_sistema_login);
 
+        txv_privacidad = (TextView)findViewById(R.id.txv_privacidad_login);
+        txv_privacidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.misalle.com.mx/privacidad.pdf"));
+                startActivity(browserIntent);
+            }
+        });
+
         inflateSpinnerCampus();
 
         String error = getIntent().getStringExtra("error");
@@ -65,10 +77,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void inflateSpinnerCampus() {
-        SistemaObject[] campus = new SistemaObject[3];
+        SistemaObject[] campus = new SistemaObject[4];
         campus[0] = new SistemaObject(0, "Lomas del campestre");
         campus[1] = new SistemaObject(1, "Juan Alonso de Torres");
         campus[2] = new SistemaObject(2, "Américas");
+        campus[3] = new SistemaObject(3, "Salamanca");
 
         final LoginSpinnerAdapter spinnerAdapter = new LoginSpinnerAdapter(LoginActivity.this, R.layout.spinner_item_login, campus);
         spinner_campus.setAdapter(spinnerAdapter);
@@ -100,6 +113,11 @@ public class LoginActivity extends AppCompatActivity {
             case 2:
                 sistemas = new SistemaObject[1];
                 sistemas[0] = new SistemaObject(33, "Preparatoria");
+                break;
+            case 3:
+                sistemas = new SistemaObject[2];
+                sistemas[0] = new SistemaObject(21, "Licenciatura 1");
+                sistemas[1] = new SistemaObject(20, "Licenciatura 2");
                 break;
             default:
                 sistemas = new SistemaObject[0];
