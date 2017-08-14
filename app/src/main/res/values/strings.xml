@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">miSalleAndroid</string>
+    <string name="app_name">miSalle</string>
     <string name="app_version">v1.0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
