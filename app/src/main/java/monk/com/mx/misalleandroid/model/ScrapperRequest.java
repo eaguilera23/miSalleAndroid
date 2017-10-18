@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ScrapperRequest {
 
-    private String BASE_URL = "http://misalle.herokuapp.com/api/v1/";
+    private String BASE_URL = "<PLACE HERE YOUR URL. CAN'T BE LOCALHOST>/api/v1/";
 
     public ScrapperRequest(){
 
