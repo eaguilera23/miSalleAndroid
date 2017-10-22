@@ -2,6 +2,8 @@
 
 ## Table of contents
 
+[Español](./README_ES.md)
+
 * [Presentation](#presentation)
   * [Characteristics](#characteristics)
   * [Requirements](#requirements)

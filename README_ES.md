@@ -4,6 +4,8 @@
 
 ## Índice
 
+[English](./README.md)
+
 * [Presentación](#presentación)
   * [Características](#características)
   * [Prerequisitos](#prerequisitos)
