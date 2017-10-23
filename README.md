@@ -69,7 +69,7 @@ With a natural way I want to say "a phone platform native way".
 
 **Student**
 
-The student can check its information faster, so the interaction with its university will be improve,
+The student can check its information faster, so the interaction with its university will be improved,
 making him to feel closer to the institution.
 
 **Institution**
@@ -174,7 +174,7 @@ It is the main source of information.
 This risk happened and led to the shutdown of the service. I underestimated the technology department of the institution,
 and I wasn't prepared enough to overcome the blocking.
 
-#### Change of the institution website
+#### Change on the institution website
 
 ##### Description
 Webscrapping is how the system gets the students information, so this means that it is heavily dependent on how the 
@@ -195,7 +195,7 @@ second half of the year. The system being launched at August 2017, gives us a wi
 to create a solid user base.
 
 ##### Action
-Designing the system following SOLID principles and Separation of Concerns, so when change comes, it can happend without
+Designing the system following SOLID principles and Separation of Concerns, so when change comes, it can happen without
 affecting other components.
 
 #### Lack of income ($$$)
